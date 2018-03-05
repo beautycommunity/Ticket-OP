@@ -1,0 +1,99 @@
+﻿@using Ticket_OP.Models
+@model Ticket_OP.Models.CreTicket
+
+@{
+    ViewBag.Title = "CreateTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>+ New Ticket @ViewBag.BRAND </h2>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-8">
+
+        <section id="newTicket">
+
+            @using (Html.BeginForm("CreateTicket", "TicketOP", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                @*@Html.TextBoxFor(m => m.US_ID, new { @class = "hidden" })*@
+                <hr />
+
+                    <div class="form-group">
+                        @Html.Label("แจ้งงานจากสาขา", new { @class = "col-md-3 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.WHNAME, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("แอเรีย", new { @class = "col-md-3 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.AREA_NAME, Model.AREA, "Please select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.AREA_NAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                    @Html.LabelFor(m => m.DETAIL, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(m => m.DETAIL, new { @class = "form-control custom-control", @rows = "5", @style = "resize:    none;" })
+                            @Html.ValidationMessageFor(m => m.DETAIL, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                <br />
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-5">
+                        <input type="file" name="file1" id="file1" class="btn btn-default" />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-5">
+                        <input type="file" name="file2" id="file2" class="btn btn-default" />
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-5">
+                        <input type="file" name="file3" id="file3" class="btn btn-default" />
+                    </div>
+                </div>
+
+                <br />
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-10">
+                        <input type="submit" value="บันทึก" class="btn btn-primary" />
+                        <a href="@Url.Action("Index")" class="btn btn-default">ยกเลิก</a>
+                    </div>
+                </div>
+
+                <br />
+            }
+
+        </section>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
