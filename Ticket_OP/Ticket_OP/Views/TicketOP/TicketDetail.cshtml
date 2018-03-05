@@ -1,0 +1,417 @@
+﻿@using Ticket_OP.Models
+@model Ticket_OP.Models.AddComment
+
+@*@model IEnumerable<MVC_Ticket.Models.TicketDetail>*@
+
+
+@{
+    ViewBag.Title = "Ticket Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<style>
+    #form_rating {
+        width: 250px;
+        margin: 10px auto;
+        padding: 10px;
+        border: 1px solid #d9d9d9;
+    }
+
+        #form_rating p,
+        #form_rating input[type="submit"] {
+            text-align: center;
+            font-size: 20px;
+        }
+
+    /*#wrapper form input[type="submit"] {
+        border: 1px solid #d9d9d9;
+        background-color: #efefef;
+    }*/
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    .clasificacion {
+        direction: rtl;
+        unicode-bidi: bidi-override;
+    }
+
+    label:hover,
+    label:hover ~ label {
+        color: orange;
+    }
+
+    input[type="radio"]:checked ~ label {
+        color: orange;
+    }
+
+    .rating-stars {
+        font-size: 1.5em;
+        color: #E3E3E3;
+        margin-bottom: .5em;
+    }
+
+        .rating-stars .active {
+            color: #737373;
+        }
+</style>
+<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+@*@if (Model != null && Model.TK_ID != 0)
+{
+    foreach (var item in Model.ticketDetail)
+    {
+        <div style="word-wrap:break-word;">
+            <h3>@Html.DisplayFor(m => item.TOPIC)</h3>
+        </div>
+        break;
+
+    }
+}*@
+
+<style>
+</style>
+
+<br />
+
+    <a href="@Url.Action("Index")" class="btn btn-default">กลับหน้าหลัก</a>
+
+<br />
+<hr />
+
+    @foreach (var _item in Model.ticket)
+    {
+        if (_item.ORDERNO == 1)
+        {
+            <div class="well well-lg">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    @Html.LabelFor(m => _item.TICKETNO, new { @class = "col-md control-label" })
+                    @Html.DisplayFor(m => _item.TICKETNO, new { @class = "form-control" })
+
+                </div>
+
+                <div class="col-md-3">
+                    @Html.LabelFor(m => _item.ST_NAME, new { @class = "col-md control-label" })
+
+                    @switch (_item.SS_ID)
+                    {
+                        case 1:
+                            <span style="color:#0099ff">@Html.DisplayFor(m => _item.ST_NAME, new { @class = "form-control" })</span>
+                            break;
+                        case 2:
+                            <span style="color:#bd0f15">@Html.DisplayFor(m => _item.ST_NAME, new { @class = "form-control" })</span>
+                            break;
+                        case 3:
+                            <span style="color:#00cc00">@Html.DisplayFor(m => _item.ST_NAME, new { @class = "form-control" })</span>
+                            break;
+                        default:
+                            @Html.DisplayFor(m => _item.ST_NAME, new { @class = "form-control" })
+                            break;
+                    }
+                </div>
+
+                <div class="col-md-2">
+                    @*@if (_item.REC_NICKNAME != null)
+                    {
+                        @Html.LabelFor(m => _item.REC_NICKNAME, new { @class = "col-md control-label" })
+
+                        switch (_item.SS_ID)
+                        {
+                            case 1:
+                                <span style="color:#0099ff">@Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })</span>
+                                break;
+                            case 2:
+                                <span style="color:#bd0f15">@Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })</span>
+                                break;
+                            case 3:
+                                <span style="color:#00cc00">@Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })</span>
+                                break;
+                            default:
+                                @Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })
+                                break;
+                        }
+                    }*@
+                </div>
+
+            </div>
+            <hr />
+
+            <section id=m.TICKETNO>
+
+                <div class="row">
+
+                    <div class="col-md-4" style="word-wrap:break-word;">
+                        @Html.LabelFor(m => _item.DETAIL, new { @class = "col-md control-label" })
+                        <br />
+                        @Html.DisplayFor(m => _item.DETAIL, new { @class = "form-control" })
+                    </div>
+
+                    @*<div class="col-md-2">
+
+                        @Html.LabelFor(m => _item.WHCODE, new { @class = "col-md control-label" })
+                        <br />
+                        @Html.DisplayFor(m => _item.WHCODE, new { @class = "form-control" })
+
+                    </div>*@
+
+                    <div class="col-md-1">
+
+                        @Html.LabelFor(m => _item.WHNAME, new { @class = "col-md control-label" })
+                        <br />
+                        @Html.DisplayFor(m => _item.WHNAME, new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.LabelFor(m => _item.AREA, new { @class = "col-md control-label" })
+                        <br />
+                        @Html.DisplayFor(m => _item.AREA, new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-1">
+
+                        @Html.LabelFor(m => _item.CREATEDATE, new { @class = "col-md control-label" })
+                        <br />
+                        @Html.DisplayFor(m => _item.CREATEDATE, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-1">
+
+                        @Html.LabelFor(m => _item.CREATETIME, new { @class = "col-md control-label" })
+                        <br />
+                        @Html.DisplayFor(m => _item.CREATETIME, new { @class = "form-control" })
+
+                    </div>
+                    @*<div class="col-md-1">
+
+                            @Html.LabelFor(m => _item.REC_NICKNAME, new { @class = "col-md control-label" })
+                            <br />
+                            @Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })
+
+                    </div>*@
+
+
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-1">
+                        <br />
+                        @*<input type="button" value="รายละเอียด" id=_item.TICKETNO class="btn btn-primary" onclick="location.href='@Url.Action("TicketDetail", "Ticket",new { TicketId = _item.TK_ID })'" />*@
+                    </div>
+                    <div class="col-md-1">
+                        <br />
+                        @*@if (_item.SS_ID < 2 && ViewBag.UserDepId == 13)
+                        {
+                            <input type="button" value="รับงาน" id=_item.TICKETNO class="btn btn-success" onclick="location.href='@Url.Action("TicketReceive", "Ticket",new { TicketId = _item.TK_ID })'" />
+                        }*@
+                    </div>
+                </div>
+
+            </section>
+            <hr />
+
+                @*@if (_item.FLS_H_1 != null || _item.FLS_H_2 != null || _item.FLS_H_3 != null)
+                {
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            @if (_item.FLS_H_1 != null && _item.FLS_H_1.Length > 0)
+                            {
+                                if (_item.FLAG_1 == "1")
+                                {
+                                    <img id="img01" src="@Url.Content(_item.FLS_H_1)" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" />
+
+                                    <div id="myModal1" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <img src="@Url.Content(_item.FLS_H_1)" class="img img-responsive img-thumbnail" style="width:100%;cursor:pointer;" />
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                }
+                                else if (_item.FLAG_1 == "2")
+                                {
+                                    if (_item.IMG_1 == null)
+                                    {
+                                        <a href="@Url.Content(_item.FLS_H_1)"><img id="img01" src="https://cdn4.iconfinder.com/data/icons/48-bubbles/48/12.File-512.png" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" /> </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Content(_item.FLS_H_1)"><img id="img01" src="@Url.Content(_item.IMG_1)" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" /> </a>
+                                    }
+                                }
+                            }
+
+                            @if (_item.FLS_H_2 != null && _item.FLS_H_2.Length > 0)
+                            {
+                                if (_item.FLAG_2 == "1")
+                                {
+                                    <img id="img02" src="@Url.Content(_item.FLS_H_2)" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" />
+
+                                    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <img src="@Url.Content(_item.FLS_H_2)" class="img img-responsive img-thumbnail" style="width:100%;cursor:pointer;" />
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                }
+                                else if (_item.FLAG_2 == "2")
+                                {
+                                    if (_item.IMG_2 == null)
+                                    {
+                                        <a href="@Url.Content(_item.FLS_H_2)"><img id="img02" src="https://cdn4.iconfinder.com/data/icons/48-bubbles/48/12.File-512.png" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" /> </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Content(_item.FLS_H_2)"><img id="img02" src="@Url.Content(_item.IMG_2)" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" /> </a>
+                                    }
+                                }
+                            }
+
+                            @if (_item.FLS_H_3 != null && _item.FLS_H_3.Length > 0)
+                            {
+                                if (_item.FLAG_3 == "1")
+                                {
+                                    <img id="img03" src="@Url.Content(_item.FLS_H_3)" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" />
+                                    <div id="myModal3" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <img src="@Url.Content(_item.FLS_H_3)" class="img img-responsive img-thumbnail" style="width:100%;cursor:pointer;" />
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                }
+                                else if (_item.FLAG_3 == "2")
+                                {
+                                    if (_item.IMG_1 == null)
+                                    {
+                                        <a href="@Url.Content(_item.FLS_H_3)"><img id="img03" src="https://cdn4.iconfinder.com/data/icons/48-bubbles/48/12.File-512.png" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" /> </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Content(_item.FLS_H_3)"><img id="img03" src="@Url.Content(_item.IMG_3)" class="img img-responsive img-thumbnail" style="width:100px;cursor:pointer;" /> </a>
+                                    }
+                                }
+                            }
+
+                        </div>
+                    </div>
+                }*@
+
+            </div>
+        }
+
+        if (_item.TK_MESAGE.Length > 0)
+        {
+            <div class="well well-lg">
+
+                <section>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => _item.TK_MESAGE, new { @class = "col-md control-label" })
+                            <br />
+                            @Html.DisplayFor(m => _item.TK_MESAGE, new { @class = "form-control" })
+                        </div>
+
+                        <div class="col-md-2">
+                            @Html.LabelFor(m => _item.POS_NAME, new { @class = "col-md control-label" })
+                            @Html.DisplayFor(m => _item.POS_NAME, new { @class = "form-control" })
+
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => _item.POSTDATE, new { @class = "col-md control-label" })
+                            @Html.DisplayFor(m => _item.POSTDATE, new { @class = "form-control" })
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <hr />
+            </div>
+
+        }
+    }
+
+    <br />
+
+    <hr />
+    @*@if (Model.SS_ID > 0)
+    {*@
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <section id="newComment">
+
+                    @using (Html.BeginForm("TicketDetail", "TicketOP", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.TextBoxFor(m => m.TK_ID, new { @class = "hidden" })
+                        @Html.TextBoxFor(m => m.TICKETNO, new { @class = "hidden" })
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.TK_MESAGE, new { @class = "col-md-2 control-label" })
+                        </div>
+
+                        @Html.TextAreaFor(m => m.TK_MESAGE, new { @class = "form-control custom-control", @rows = "5", @style = "resize: none;" })
+                        @Html.ValidationMessageFor(m => m.TK_MESAGE, "", new { @class = "text-danger" })
+
+                        <br />
+
+                        <input type="submit" value="บันทึก" class="btn btn-primary" />    
+                    }
+
+                </section>
+            </div>
+        </div>
+    @*}*@
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            if (@TempData["Modal_CloseJob"] == 99){
+                $('#squarespaceModal').modal('show');
+            }
+        });
+    </script>
+    <script>
+
+        //$("#img01").click(function () {
+
+        //    $("#myModal1").modal("show");
+
+        //});
+        //$("#img02").click(function () {
+
+        //    $("#myModal2").modal("show");
+
+        //});
+        //$("#img03").click(function () {
+
+        //    $("#myModal3").modal("show");
+
+        //});
+
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

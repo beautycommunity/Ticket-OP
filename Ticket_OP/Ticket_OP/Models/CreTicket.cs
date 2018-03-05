@@ -30,8 +30,6 @@ namespace Ticket_OP.Models
         [Required(ErrorMessage = "กรุณาเลือกประเภทงาน")]
         public int? JT_ID { get; set; }
 
-        [Display(Name = "ประเภทงาน")]
-        public string JT_NAME { get; set; }
 
         public int? US_ID { get; set; }
         //[Display(Name = "ผู้แจ้ง")]
@@ -43,17 +41,7 @@ namespace Ticket_OP.Models
         [Display(Name = "วันที่แจ้ง")]
         public string CREATEDATE { get; set; }
 
-        public string SOLUTION { get; set; }
-
-        public SelectList DP_LIST { get; set; }
-        public int? DP_ID { get; set; }
-        public SelectList CN_LIST { get; set; }
-        public int? CN_ID { get; set; }
-        public string INFORMER { get; set; }
-
-
         public string WHNAME { get; set; }
-
 
         public SelectList AREA { get; set; }
 
@@ -77,21 +65,6 @@ namespace Ticket_OP.Models
         [Display(Name = "สถานะ")]
         public string ST_NAME { get; set; }
 
-        //public SelectList JT_LIST { get; set; }
-        //public int? JT_ID { get; set; }
-        //[Display(Name = "ประเภทงาน")]
-        //public string JT_NAME { get; set; }
-
-        //public int? US_ID { get; set; }
-        //[Display(Name = "ผู้แจ้ง")]
-        //public string CRE_NAME { get; set; }
-
-        //[Display(Name = "ผู้แจ้ง")]
-        //public string CRE_NICKNAME { get; set; }
-
-        //[Display(Name = "E-Mail")]
-        //public string EMAIL { get; set; }
-
         [Display(Name = "วันที่")]
         public string CREATEDATE { get; set; }
 
@@ -107,30 +80,41 @@ namespace Ticket_OP.Models
         [Display(Name = "แอเรีย")]
         public string AREA { get; set; }
 
-        //public string SOLUTION { get; set; }
+        [Display(Name = "ข้อความ")]
+        public string TK_MESAGE { get; set; }
 
-        //public int? RECEIVE_ID { get; set; }
+        public int? I_US_ID { get; set; }
+        [Display(Name = "ตอบ")]
+        public string POS_NAME { get; set; }
 
-        //[Display(Name = "ผู้รับ")]
-        //public string REC_NICKNAME { get; set; }
+        [Display(Name = "วันที่")]
+        public string POSTDATE { get; set; }
 
-        //public string RECEIVEDATE { get; set; }
+        public int? ORDERNO { get; set; }
+        public string US_ID { get; set; }
+    }
 
-        //public int? R_DIFF { get; set; }
+    public class AddComment
+    {
+        public int TK_ID { get; set; }
+        public int ORDERNO { get; set; }
+        public string TICKETNO { get; set; }
 
-        //public string CLOSEDDATE { get; set; }
+        public SelectList JT_LIST { get; set; }
+        [Required(ErrorMessage = "กรุณาเลือกประเภทงาน")]
+        [Display(Name = "ประเภท")]
+        public int? JT_ID { get; set; }
 
-        //public int? C_DIFF { get; set; }
+        [Required(ErrorMessage = "กรุณาเพิ่มข้อความก่อนกดปุ่มบันทึก")]
+        [Display(Name = "ข้อความ")]
+        public string TK_MESAGE { get; set; }
 
-        //public int? J_DIFF { get; set; }
+        public int US_ID { get; set; }
+        public string CREATEDATE { get; set; }
+        public int? SS_ID { get; set; }
 
-        //[Display(Name = "ผู้ปิด")]
-        //public string CLS_NAME { get; set; }
+        public ICollection<Ticket> ticket { get; set; }
 
-        //public int? Rating { get; set; }
-
-        //[Display(Name = "คอมเม้น : ")]
-        //public string Message { get; set; }
     }
 
 }

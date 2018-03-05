@@ -39,6 +39,12 @@ namespace Ticket_OP.DATA
     partial void InsertTRN_TICKET(TRN_TICKET instance);
     partial void UpdateTRN_TICKET(TRN_TICKET instance);
     partial void DeleteTRN_TICKET(TRN_TICKET instance);
+    partial void InsertTRN_TICKET_I(TRN_TICKET_I instance);
+    partial void UpdateTRN_TICKET_I(TRN_TICKET_I instance);
+    partial void DeleteTRN_TICKET_I(TRN_TICKET_I instance);
+    partial void InsertTRN_TICKET_F(TRN_TICKET_F instance);
+    partial void UpdateTRN_TICKET_F(TRN_TICKET_F instance);
+    partial void DeleteTRN_TICKET_F(TRN_TICKET_F instance);
     #endregion
 		
 		public Data_OPDataContext() : 
@@ -100,6 +106,30 @@ namespace Ticket_OP.DATA
 			get
 			{
 				return this.GetTable<VW_TICKET>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TRN_TICKET_I> TRN_TICKET_Is
+		{
+			get
+			{
+				return this.GetTable<TRN_TICKET_I>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_TICKET_DETAIL> VW_TICKET_DETAILs
+		{
+			get
+			{
+				return this.GetTable<VW_TICKET_DETAIL>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TRN_TICKET_F> TRN_TICKET_Fs
+		{
+			get
+			{
+				return this.GetTable<TRN_TICKET_F>();
 			}
 		}
 	}
@@ -937,6 +967,661 @@ namespace Ticket_OP.DATA
 				{
 					this._FLAG = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRN_TICKET_I")]
+	public partial class TRN_TICKET_I : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TK_ID;
+		
+		private int _ORDERNO;
+		
+		private string _TK_MESAGE;
+		
+		private string _US_ID;
+		
+		private System.Nullable<System.DateTime> _CREATEDATE;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTK_IDChanging(int value);
+    partial void OnTK_IDChanged();
+    partial void OnORDERNOChanging(int value);
+    partial void OnORDERNOChanged();
+    partial void OnTK_MESAGEChanging(string value);
+    partial void OnTK_MESAGEChanged();
+    partial void OnUS_IDChanging(string value);
+    partial void OnUS_IDChanged();
+    partial void OnCREATEDATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnCREATEDATEChanged();
+    #endregion
+		
+		public TRN_TICKET_I()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int TK_ID
+		{
+			get
+			{
+				return this._TK_ID;
+			}
+			set
+			{
+				if ((this._TK_ID != value))
+				{
+					this.OnTK_IDChanging(value);
+					this.SendPropertyChanging();
+					this._TK_ID = value;
+					this.SendPropertyChanged("TK_ID");
+					this.OnTK_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ORDERNO
+		{
+			get
+			{
+				return this._ORDERNO;
+			}
+			set
+			{
+				if ((this._ORDERNO != value))
+				{
+					this.OnORDERNOChanging(value);
+					this.SendPropertyChanging();
+					this._ORDERNO = value;
+					this.SendPropertyChanged("ORDERNO");
+					this.OnORDERNOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_MESAGE", DbType="VarChar(255)")]
+		public string TK_MESAGE
+		{
+			get
+			{
+				return this._TK_MESAGE;
+			}
+			set
+			{
+				if ((this._TK_MESAGE != value))
+				{
+					this.OnTK_MESAGEChanging(value);
+					this.SendPropertyChanging();
+					this._TK_MESAGE = value;
+					this.SendPropertyChanged("TK_MESAGE");
+					this.OnTK_MESAGEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_US_ID", DbType="VarChar(5)")]
+		public string US_ID
+		{
+			get
+			{
+				return this._US_ID;
+			}
+			set
+			{
+				if ((this._US_ID != value))
+				{
+					this.OnUS_IDChanging(value);
+					this.SendPropertyChanging();
+					this._US_ID = value;
+					this.SendPropertyChanged("US_ID");
+					this.OnUS_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATEDATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATEDATE
+		{
+			get
+			{
+				return this._CREATEDATE;
+			}
+			set
+			{
+				if ((this._CREATEDATE != value))
+				{
+					this.OnCREATEDATEChanging(value);
+					this.SendPropertyChanging();
+					this._CREATEDATE = value;
+					this.SendPropertyChanged("CREATEDATE");
+					this.OnCREATEDATEChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_TICKET_DETAIL")]
+	public partial class VW_TICKET_DETAIL
+	{
+		
+		private int _TK_ID;
+		
+		private string _TICKETNO;
+		
+		private string _WHCODE;
+		
+		private string _WHNAME;
+		
+		private string _AREA;
+		
+		private string _DETAIL;
+		
+		private string _STCODE;
+		
+		private System.Nullable<System.DateTime> _CREATEDATE;
+		
+		private string _CREATETIME;
+		
+		private string _TNAME;
+		
+		private string _BRAND;
+		
+		private System.Nullable<int> _SS_ID;
+		
+		private string _FLAG;
+		
+		private System.Nullable<int> _ORDERNO;
+		
+		private string _TK_MESAGE;
+		
+		private string _US_ID;
+		
+		private System.Nullable<System.DateTime> _DETAILDATE;
+		
+		public VW_TICKET_DETAIL()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL")]
+		public int TK_ID
+		{
+			get
+			{
+				return this._TK_ID;
+			}
+			set
+			{
+				if ((this._TK_ID != value))
+				{
+					this._TK_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TICKETNO", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string TICKETNO
+		{
+			get
+			{
+				return this._TICKETNO;
+			}
+			set
+			{
+				if ((this._TICKETNO != value))
+				{
+					this._TICKETNO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WHCODE", DbType="VarChar(10)")]
+		public string WHCODE
+		{
+			get
+			{
+				return this._WHCODE;
+			}
+			set
+			{
+				if ((this._WHCODE != value))
+				{
+					this._WHCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WHNAME", DbType="VarChar(10)")]
+		public string WHNAME
+		{
+			get
+			{
+				return this._WHNAME;
+			}
+			set
+			{
+				if ((this._WHNAME != value))
+				{
+					this._WHNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AREA", DbType="VarChar(20)")]
+		public string AREA
+		{
+			get
+			{
+				return this._AREA;
+			}
+			set
+			{
+				if ((this._AREA != value))
+				{
+					this._AREA = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DETAIL", DbType="VarChar(500)")]
+		public string DETAIL
+		{
+			get
+			{
+				return this._DETAIL;
+			}
+			set
+			{
+				if ((this._DETAIL != value))
+				{
+					this._DETAIL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STCODE", DbType="VarChar(5)")]
+		public string STCODE
+		{
+			get
+			{
+				return this._STCODE;
+			}
+			set
+			{
+				if ((this._STCODE != value))
+				{
+					this._STCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATEDATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATEDATE
+		{
+			get
+			{
+				return this._CREATEDATE;
+			}
+			set
+			{
+				if ((this._CREATEDATE != value))
+				{
+					this._CREATEDATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATETIME", DbType="VarChar(30)")]
+		public string CREATETIME
+		{
+			get
+			{
+				return this._CREATETIME;
+			}
+			set
+			{
+				if ((this._CREATETIME != value))
+				{
+					this._CREATETIME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TNAME", DbType="NVarChar(50)")]
+		public string TNAME
+		{
+			get
+			{
+				return this._TNAME;
+			}
+			set
+			{
+				if ((this._TNAME != value))
+				{
+					this._TNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BRAND", DbType="VarChar(5)")]
+		public string BRAND
+		{
+			get
+			{
+				return this._BRAND;
+			}
+			set
+			{
+				if ((this._BRAND != value))
+				{
+					this._BRAND = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SS_ID", DbType="Int")]
+		public System.Nullable<int> SS_ID
+		{
+			get
+			{
+				return this._SS_ID;
+			}
+			set
+			{
+				if ((this._SS_ID != value))
+				{
+					this._SS_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLAG", DbType="VarChar(50)")]
+		public string FLAG
+		{
+			get
+			{
+				return this._FLAG;
+			}
+			set
+			{
+				if ((this._FLAG != value))
+				{
+					this._FLAG = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="Int")]
+		public System.Nullable<int> ORDERNO
+		{
+			get
+			{
+				return this._ORDERNO;
+			}
+			set
+			{
+				if ((this._ORDERNO != value))
+				{
+					this._ORDERNO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_MESAGE", DbType="VarChar(255)")]
+		public string TK_MESAGE
+		{
+			get
+			{
+				return this._TK_MESAGE;
+			}
+			set
+			{
+				if ((this._TK_MESAGE != value))
+				{
+					this._TK_MESAGE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_US_ID", DbType="VarChar(5)")]
+		public string US_ID
+		{
+			get
+			{
+				return this._US_ID;
+			}
+			set
+			{
+				if ((this._US_ID != value))
+				{
+					this._US_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DETAILDATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DETAILDATE
+		{
+			get
+			{
+				return this._DETAILDATE;
+			}
+			set
+			{
+				if ((this._DETAILDATE != value))
+				{
+					this._DETAILDATE = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRN_TICKET_F")]
+	public partial class TRN_TICKET_F : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TK_ID;
+		
+		private short _ORDERNO;
+		
+		private int _FILENO;
+		
+		private string _PATH1;
+		
+		private string _PATH2;
+		
+		private string _PATH3;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTK_IDChanging(int value);
+    partial void OnTK_IDChanged();
+    partial void OnORDERNOChanging(short value);
+    partial void OnORDERNOChanged();
+    partial void OnFILENOChanging(int value);
+    partial void OnFILENOChanged();
+    partial void OnPATH1Changing(string value);
+    partial void OnPATH1Changed();
+    partial void OnPATH2Changing(string value);
+    partial void OnPATH2Changed();
+    partial void OnPATH3Changing(string value);
+    partial void OnPATH3Changed();
+    #endregion
+		
+		public TRN_TICKET_F()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int TK_ID
+		{
+			get
+			{
+				return this._TK_ID;
+			}
+			set
+			{
+				if ((this._TK_ID != value))
+				{
+					this.OnTK_IDChanging(value);
+					this.SendPropertyChanging();
+					this._TK_ID = value;
+					this.SendPropertyChanged("TK_ID");
+					this.OnTK_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="SmallInt NOT NULL", IsPrimaryKey=true)]
+		public short ORDERNO
+		{
+			get
+			{
+				return this._ORDERNO;
+			}
+			set
+			{
+				if ((this._ORDERNO != value))
+				{
+					this.OnORDERNOChanging(value);
+					this.SendPropertyChanging();
+					this._ORDERNO = value;
+					this.SendPropertyChanged("ORDERNO");
+					this.OnORDERNOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FILENO", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FILENO
+		{
+			get
+			{
+				return this._FILENO;
+			}
+			set
+			{
+				if ((this._FILENO != value))
+				{
+					this.OnFILENOChanging(value);
+					this.SendPropertyChanging();
+					this._FILENO = value;
+					this.SendPropertyChanged("FILENO");
+					this.OnFILENOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH1", DbType="VarChar(1000)")]
+		public string PATH1
+		{
+			get
+			{
+				return this._PATH1;
+			}
+			set
+			{
+				if ((this._PATH1 != value))
+				{
+					this.OnPATH1Changing(value);
+					this.SendPropertyChanging();
+					this._PATH1 = value;
+					this.SendPropertyChanged("PATH1");
+					this.OnPATH1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH2", DbType="VarChar(1000)")]
+		public string PATH2
+		{
+			get
+			{
+				return this._PATH2;
+			}
+			set
+			{
+				if ((this._PATH2 != value))
+				{
+					this.OnPATH2Changing(value);
+					this.SendPropertyChanging();
+					this._PATH2 = value;
+					this.SendPropertyChanged("PATH2");
+					this.OnPATH2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH3", DbType="VarChar(1000)")]
+		public string PATH3
+		{
+			get
+			{
+				return this._PATH3;
+			}
+			set
+			{
+				if ((this._PATH3 != value))
+				{
+					this.OnPATH3Changing(value);
+					this.SendPropertyChanging();
+					this._PATH3 = value;
+					this.SendPropertyChanged("PATH3");
+					this.OnPATH3Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
