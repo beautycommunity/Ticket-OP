@@ -22,7 +22,7 @@
 
         <section id="newTicket">
 
-            @using (Html.BeginForm("CreateTicket", "TicketOP", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", Pos = @ViewBag.Pos }))
+            @using (Html.BeginForm("CreateTicket", "TicketOP", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
             {
                 @*@Html.TextBoxFor(m => m.US_ID, new { @class = "hidden" })*@
                 <hr />
@@ -81,7 +81,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-3 col-md-10">
                         <input type="submit" value="บันทึก" class="btn btn-primary" />
-                        <a href="@Url.Action("Index")" class="btn btn-default">ยกเลิก</a>
+                        <a href="@Url.Action("Index", new { Pos = "1" })" class="btn btn-default">ยกเลิก</a>
                     </div>
                 </div>
 

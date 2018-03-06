@@ -39,15 +39,15 @@ namespace Ticket_OP.DATA
     partial void InsertTRN_TICKET(TRN_TICKET instance);
     partial void UpdateTRN_TICKET(TRN_TICKET instance);
     partial void DeleteTRN_TICKET(TRN_TICKET instance);
-    partial void InsertTRN_TICKET_I(TRN_TICKET_I instance);
-    partial void UpdateTRN_TICKET_I(TRN_TICKET_I instance);
-    partial void DeleteTRN_TICKET_I(TRN_TICKET_I instance);
     partial void InsertTRN_TICKET_F(TRN_TICKET_F instance);
     partial void UpdateTRN_TICKET_F(TRN_TICKET_F instance);
     partial void DeleteTRN_TICKET_F(TRN_TICKET_F instance);
     partial void InsertDEV_TASK_FLAG(DEV_TASK_FLAG instance);
     partial void UpdateDEV_TASK_FLAG(DEV_TASK_FLAG instance);
     partial void DeleteDEV_TASK_FLAG(DEV_TASK_FLAG instance);
+    partial void InsertTRN_TICKET_I(TRN_TICKET_I instance);
+    partial void UpdateTRN_TICKET_I(TRN_TICKET_I instance);
+    partial void DeleteTRN_TICKET_I(TRN_TICKET_I instance);
     #endregion
 		
 		public Data_OPDataContext() : 
@@ -104,11 +104,19 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		public System.Data.Linq.Table<VW_TICKET> VW_TICKETs
+		public System.Data.Linq.Table<TRN_TICKET_F> TRN_TICKET_Fs
 		{
 			get
 			{
-				return this.GetTable<VW_TICKET>();
+				return this.GetTable<TRN_TICKET_F>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DEV_TASK_FLAG> DEV_TASK_FLAGs
+		{
+			get
+			{
+				return this.GetTable<DEV_TASK_FLAG>();
 			}
 		}
 		
@@ -120,14 +128,6 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		public System.Data.Linq.Table<TRN_TICKET_F> TRN_TICKET_Fs
-		{
-			get
-			{
-				return this.GetTable<TRN_TICKET_F>();
-			}
-		}
-		
 		public System.Data.Linq.Table<VW_TICKET_DETAIL> VW_TICKET_DETAILs
 		{
 			get
@@ -136,11 +136,11 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		public System.Data.Linq.Table<DEV_TASK_FLAG> DEV_TASK_FLAGs
+		public System.Data.Linq.Table<VW_TICKET> VW_TICKETs
 		{
 			get
 			{
-				return this.GetTable<DEV_TASK_FLAG>();
+				return this.GetTable<VW_TICKET>();
 			}
 		}
 	}
@@ -739,407 +739,6 @@ namespace Ticket_OP.DATA
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_TICKET")]
-	public partial class VW_TICKET
-	{
-		
-		private int _TK_ID;
-		
-		private string _TICKETNO;
-		
-		private string _WHCODE;
-		
-		private string _WHNAME;
-		
-		private string _AREA;
-		
-		private string _DETAIL;
-		
-		private string _STCODE;
-		
-		private System.Nullable<System.DateTime> _CREATEDATE;
-		
-		private string _CREATETIME;
-		
-		private string _TNAME;
-		
-		private string _BRAND;
-		
-		private System.Nullable<int> _SS_ID;
-		
-		private string _FLAG;
-		
-		public VW_TICKET()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL")]
-		public int TK_ID
-		{
-			get
-			{
-				return this._TK_ID;
-			}
-			set
-			{
-				if ((this._TK_ID != value))
-				{
-					this._TK_ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TICKETNO", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string TICKETNO
-		{
-			get
-			{
-				return this._TICKETNO;
-			}
-			set
-			{
-				if ((this._TICKETNO != value))
-				{
-					this._TICKETNO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WHCODE", DbType="VarChar(10)")]
-		public string WHCODE
-		{
-			get
-			{
-				return this._WHCODE;
-			}
-			set
-			{
-				if ((this._WHCODE != value))
-				{
-					this._WHCODE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WHNAME", DbType="VarChar(10)")]
-		public string WHNAME
-		{
-			get
-			{
-				return this._WHNAME;
-			}
-			set
-			{
-				if ((this._WHNAME != value))
-				{
-					this._WHNAME = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AREA", DbType="VarChar(20)")]
-		public string AREA
-		{
-			get
-			{
-				return this._AREA;
-			}
-			set
-			{
-				if ((this._AREA != value))
-				{
-					this._AREA = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DETAIL", DbType="VarChar(500)")]
-		public string DETAIL
-		{
-			get
-			{
-				return this._DETAIL;
-			}
-			set
-			{
-				if ((this._DETAIL != value))
-				{
-					this._DETAIL = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STCODE", DbType="VarChar(5)")]
-		public string STCODE
-		{
-			get
-			{
-				return this._STCODE;
-			}
-			set
-			{
-				if ((this._STCODE != value))
-				{
-					this._STCODE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATEDATE", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CREATEDATE
-		{
-			get
-			{
-				return this._CREATEDATE;
-			}
-			set
-			{
-				if ((this._CREATEDATE != value))
-				{
-					this._CREATEDATE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATETIME", DbType="VarChar(30)")]
-		public string CREATETIME
-		{
-			get
-			{
-				return this._CREATETIME;
-			}
-			set
-			{
-				if ((this._CREATETIME != value))
-				{
-					this._CREATETIME = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TNAME", DbType="NVarChar(50)")]
-		public string TNAME
-		{
-			get
-			{
-				return this._TNAME;
-			}
-			set
-			{
-				if ((this._TNAME != value))
-				{
-					this._TNAME = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BRAND", DbType="VarChar(5)")]
-		public string BRAND
-		{
-			get
-			{
-				return this._BRAND;
-			}
-			set
-			{
-				if ((this._BRAND != value))
-				{
-					this._BRAND = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SS_ID", DbType="Int")]
-		public System.Nullable<int> SS_ID
-		{
-			get
-			{
-				return this._SS_ID;
-			}
-			set
-			{
-				if ((this._SS_ID != value))
-				{
-					this._SS_ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLAG", DbType="VarChar(50)")]
-		public string FLAG
-		{
-			get
-			{
-				return this._FLAG;
-			}
-			set
-			{
-				if ((this._FLAG != value))
-				{
-					this._FLAG = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRN_TICKET_I")]
-	public partial class TRN_TICKET_I : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TK_ID;
-		
-		private int _ORDERNO;
-		
-		private string _TK_MESAGE;
-		
-		private string _US_ID;
-		
-		private System.Nullable<System.DateTime> _CREATEDATE;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTK_IDChanging(int value);
-    partial void OnTK_IDChanged();
-    partial void OnORDERNOChanging(int value);
-    partial void OnORDERNOChanged();
-    partial void OnTK_MESAGEChanging(string value);
-    partial void OnTK_MESAGEChanged();
-    partial void OnUS_IDChanging(string value);
-    partial void OnUS_IDChanged();
-    partial void OnCREATEDATEChanging(System.Nullable<System.DateTime> value);
-    partial void OnCREATEDATEChanged();
-    #endregion
-		
-		public TRN_TICKET_I()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int TK_ID
-		{
-			get
-			{
-				return this._TK_ID;
-			}
-			set
-			{
-				if ((this._TK_ID != value))
-				{
-					this.OnTK_IDChanging(value);
-					this.SendPropertyChanging();
-					this._TK_ID = value;
-					this.SendPropertyChanged("TK_ID");
-					this.OnTK_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ORDERNO
-		{
-			get
-			{
-				return this._ORDERNO;
-			}
-			set
-			{
-				if ((this._ORDERNO != value))
-				{
-					this.OnORDERNOChanging(value);
-					this.SendPropertyChanging();
-					this._ORDERNO = value;
-					this.SendPropertyChanged("ORDERNO");
-					this.OnORDERNOChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_MESAGE", DbType="VarChar(255)")]
-		public string TK_MESAGE
-		{
-			get
-			{
-				return this._TK_MESAGE;
-			}
-			set
-			{
-				if ((this._TK_MESAGE != value))
-				{
-					this.OnTK_MESAGEChanging(value);
-					this.SendPropertyChanging();
-					this._TK_MESAGE = value;
-					this.SendPropertyChanged("TK_MESAGE");
-					this.OnTK_MESAGEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_US_ID", DbType="VarChar(5)")]
-		public string US_ID
-		{
-			get
-			{
-				return this._US_ID;
-			}
-			set
-			{
-				if ((this._US_ID != value))
-				{
-					this.OnUS_IDChanging(value);
-					this.SendPropertyChanging();
-					this._US_ID = value;
-					this.SendPropertyChanged("US_ID");
-					this.OnUS_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATEDATE", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CREATEDATE
-		{
-			get
-			{
-				return this._CREATEDATE;
-			}
-			set
-			{
-				if ((this._CREATEDATE != value))
-				{
-					this.OnCREATEDATEChanging(value);
-					this.SendPropertyChanging();
-					this._CREATEDATE = value;
-					this.SendPropertyChanged("CREATEDATE");
-					this.OnCREATEDATEChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRN_TICKET_F")]
 	public partial class TRN_TICKET_F : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1322,6 +921,298 @@ namespace Ticket_OP.DATA
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DEV_TASK_FLAG")]
+	public partial class DEV_TASK_FLAG : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Type_name;
+		
+		private System.Nullable<int> _FLAG;
+		
+		private string _File_img;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnType_nameChanging(string value);
+    partial void OnType_nameChanged();
+    partial void OnFLAGChanging(System.Nullable<int> value);
+    partial void OnFLAGChanged();
+    partial void OnFile_imgChanging(string value);
+    partial void OnFile_imgChanged();
+    #endregion
+		
+		public DEV_TASK_FLAG()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type_name", DbType="VarChar(10)")]
+		public string Type_name
+		{
+			get
+			{
+				return this._Type_name;
+			}
+			set
+			{
+				if ((this._Type_name != value))
+				{
+					this.OnType_nameChanging(value);
+					this.SendPropertyChanging();
+					this._Type_name = value;
+					this.SendPropertyChanged("Type_name");
+					this.OnType_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLAG", DbType="Int")]
+		public System.Nullable<int> FLAG
+		{
+			get
+			{
+				return this._FLAG;
+			}
+			set
+			{
+				if ((this._FLAG != value))
+				{
+					this.OnFLAGChanging(value);
+					this.SendPropertyChanging();
+					this._FLAG = value;
+					this.SendPropertyChanged("FLAG");
+					this.OnFLAGChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_File_img", DbType="VarChar(255)")]
+		public string File_img
+		{
+			get
+			{
+				return this._File_img;
+			}
+			set
+			{
+				if ((this._File_img != value))
+				{
+					this.OnFile_imgChanging(value);
+					this.SendPropertyChanging();
+					this._File_img = value;
+					this.SendPropertyChanged("File_img");
+					this.OnFile_imgChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRN_TICKET_I")]
+	public partial class TRN_TICKET_I : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TK_ID;
+		
+		private int _ORDERNO;
+		
+		private string _TK_MESAGE;
+		
+		private string _STCODE;
+		
+		private System.Nullable<System.DateTime> _CREATEDATE;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTK_IDChanging(int value);
+    partial void OnTK_IDChanged();
+    partial void OnORDERNOChanging(int value);
+    partial void OnORDERNOChanged();
+    partial void OnTK_MESAGEChanging(string value);
+    partial void OnTK_MESAGEChanged();
+    partial void OnSTCODEChanging(string value);
+    partial void OnSTCODEChanged();
+    partial void OnCREATEDATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnCREATEDATEChanged();
+    #endregion
+		
+		public TRN_TICKET_I()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int TK_ID
+		{
+			get
+			{
+				return this._TK_ID;
+			}
+			set
+			{
+				if ((this._TK_ID != value))
+				{
+					this.OnTK_IDChanging(value);
+					this.SendPropertyChanging();
+					this._TK_ID = value;
+					this.SendPropertyChanged("TK_ID");
+					this.OnTK_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ORDERNO
+		{
+			get
+			{
+				return this._ORDERNO;
+			}
+			set
+			{
+				if ((this._ORDERNO != value))
+				{
+					this.OnORDERNOChanging(value);
+					this.SendPropertyChanging();
+					this._ORDERNO = value;
+					this.SendPropertyChanged("ORDERNO");
+					this.OnORDERNOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_MESAGE", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string TK_MESAGE
+		{
+			get
+			{
+				return this._TK_MESAGE;
+			}
+			set
+			{
+				if ((this._TK_MESAGE != value))
+				{
+					this.OnTK_MESAGEChanging(value);
+					this.SendPropertyChanging();
+					this._TK_MESAGE = value;
+					this.SendPropertyChanged("TK_MESAGE");
+					this.OnTK_MESAGEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STCODE", DbType="VarChar(5)")]
+		public string STCODE
+		{
+			get
+			{
+				return this._STCODE;
+			}
+			set
+			{
+				if ((this._STCODE != value))
+				{
+					this.OnSTCODEChanging(value);
+					this.SendPropertyChanging();
+					this._STCODE = value;
+					this.SendPropertyChanged("STCODE");
+					this.OnSTCODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATEDATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATEDATE
+		{
+			get
+			{
+				return this._CREATEDATE;
+			}
+			set
+			{
+				if ((this._CREATEDATE != value))
+				{
+					this.OnCREATEDATEChanging(value);
+					this.SendPropertyChanging();
+					this._CREATEDATE = value;
+					this.SendPropertyChanged("CREATEDATE");
+					this.OnCREATEDATEChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_TICKET_DETAIL")]
 	public partial class VW_TICKET_DETAIL
 	{
@@ -1338,7 +1229,7 @@ namespace Ticket_OP.DATA
 		
 		private string _DETAIL;
 		
-		private string _STCODE;
+		private string _NICKNAME;
 		
 		private System.Nullable<System.DateTime> _CREATEDATE;
 		
@@ -1356,7 +1247,7 @@ namespace Ticket_OP.DATA
 		
 		private string _TK_MESAGE;
 		
-		private string _US_ID;
+		private string _Expr1;
 		
 		private System.Nullable<System.DateTime> _DETAILDATE;
 		
@@ -1460,18 +1351,18 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STCODE", DbType="VarChar(5)")]
-		public string STCODE
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NICKNAME", DbType="VarChar(50)")]
+		public string NICKNAME
 		{
 			get
 			{
-				return this._STCODE;
+				return this._NICKNAME;
 			}
 			set
 			{
-				if ((this._STCODE != value))
+				if ((this._NICKNAME != value))
 				{
-					this._STCODE = value;
+					this._NICKNAME = value;
 				}
 			}
 		}
@@ -1604,18 +1495,18 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_US_ID", DbType="VarChar(5)")]
-		public string US_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Expr1", DbType="VarChar(50)")]
+		public string Expr1
 		{
 			get
 			{
-				return this._US_ID;
+				return this._Expr1;
 			}
 			set
 			{
-				if ((this._US_ID != value))
+				if ((this._Expr1 != value))
 				{
-					this._US_ID = value;
+					this._Expr1 = value;
 				}
 			}
 		}
@@ -1637,81 +1528,234 @@ namespace Ticket_OP.DATA
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DEV_TASK_FLAG")]
-	public partial class DEV_TASK_FLAG : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_TICKET")]
+	public partial class VW_TICKET
 	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		private int _TK_ID;
 		
-		private int _ID;
+		private string _TICKETNO;
 		
-		private string _Type_name;
+		private string _WHCODE;
 		
-		private System.Nullable<int> _FLAG;
+		private string _WHNAME;
 		
-		private string _File_img;
+		private string _AREA;
 		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnType_nameChanging(string value);
-    partial void OnType_nameChanged();
-    partial void OnFLAGChanging(System.Nullable<int> value);
-    partial void OnFLAGChanged();
-    partial void OnFile_imgChanging(string value);
-    partial void OnFile_imgChanged();
-    #endregion
+		private string _DETAIL;
 		
-		public DEV_TASK_FLAG()
+		private string _NICKNAME;
+		
+		private System.Nullable<System.DateTime> _CREATEDATE;
+		
+		private string _CREATETIME;
+		
+		private string _TNAME;
+		
+		private string _BRAND;
+		
+		private System.Nullable<int> _SS_ID;
+		
+		private string _FLAG;
+		
+		public VW_TICKET()
 		{
-			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL")]
+		public int TK_ID
 		{
 			get
 			{
-				return this._ID;
+				return this._TK_ID;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._TK_ID != value))
 				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
+					this._TK_ID = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type_name", DbType="VarChar(10)")]
-		public string Type_name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TICKETNO", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string TICKETNO
 		{
 			get
 			{
-				return this._Type_name;
+				return this._TICKETNO;
 			}
 			set
 			{
-				if ((this._Type_name != value))
+				if ((this._TICKETNO != value))
 				{
-					this.OnType_nameChanging(value);
-					this.SendPropertyChanging();
-					this._Type_name = value;
-					this.SendPropertyChanged("Type_name");
-					this.OnType_nameChanged();
+					this._TICKETNO = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLAG", DbType="Int")]
-		public System.Nullable<int> FLAG
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WHCODE", DbType="VarChar(10)")]
+		public string WHCODE
+		{
+			get
+			{
+				return this._WHCODE;
+			}
+			set
+			{
+				if ((this._WHCODE != value))
+				{
+					this._WHCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WHNAME", DbType="VarChar(10)")]
+		public string WHNAME
+		{
+			get
+			{
+				return this._WHNAME;
+			}
+			set
+			{
+				if ((this._WHNAME != value))
+				{
+					this._WHNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AREA", DbType="VarChar(20)")]
+		public string AREA
+		{
+			get
+			{
+				return this._AREA;
+			}
+			set
+			{
+				if ((this._AREA != value))
+				{
+					this._AREA = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DETAIL", DbType="VarChar(500)")]
+		public string DETAIL
+		{
+			get
+			{
+				return this._DETAIL;
+			}
+			set
+			{
+				if ((this._DETAIL != value))
+				{
+					this._DETAIL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NICKNAME", DbType="VarChar(50)")]
+		public string NICKNAME
+		{
+			get
+			{
+				return this._NICKNAME;
+			}
+			set
+			{
+				if ((this._NICKNAME != value))
+				{
+					this._NICKNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATEDATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATEDATE
+		{
+			get
+			{
+				return this._CREATEDATE;
+			}
+			set
+			{
+				if ((this._CREATEDATE != value))
+				{
+					this._CREATEDATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATETIME", DbType="VarChar(30)")]
+		public string CREATETIME
+		{
+			get
+			{
+				return this._CREATETIME;
+			}
+			set
+			{
+				if ((this._CREATETIME != value))
+				{
+					this._CREATETIME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TNAME", DbType="NVarChar(50)")]
+		public string TNAME
+		{
+			get
+			{
+				return this._TNAME;
+			}
+			set
+			{
+				if ((this._TNAME != value))
+				{
+					this._TNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BRAND", DbType="VarChar(5)")]
+		public string BRAND
+		{
+			get
+			{
+				return this._BRAND;
+			}
+			set
+			{
+				if ((this._BRAND != value))
+				{
+					this._BRAND = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SS_ID", DbType="Int")]
+		public System.Nullable<int> SS_ID
+		{
+			get
+			{
+				return this._SS_ID;
+			}
+			set
+			{
+				if ((this._SS_ID != value))
+				{
+					this._SS_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLAG", DbType="VarChar(50)")]
+		public string FLAG
 		{
 			get
 			{
@@ -1721,52 +1765,8 @@ namespace Ticket_OP.DATA
 			{
 				if ((this._FLAG != value))
 				{
-					this.OnFLAGChanging(value);
-					this.SendPropertyChanging();
 					this._FLAG = value;
-					this.SendPropertyChanged("FLAG");
-					this.OnFLAGChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_File_img", DbType="VarChar(255)")]
-		public string File_img
-		{
-			get
-			{
-				return this._File_img;
-			}
-			set
-			{
-				if ((this._File_img != value))
-				{
-					this.OnFile_imgChanging(value);
-					this.SendPropertyChanging();
-					this._File_img = value;
-					this.SendPropertyChanged("File_img");
-					this.OnFile_imgChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

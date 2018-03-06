@@ -246,20 +246,6 @@ namespace Ticket_OP.Controllers
 
         private void SetCookie(string User,string POS)
         {
-
-            //try
-            //{
-            //    Request.Cookies["bbWhcode"].Value = User;
-            //}
-            //catch
-            //{
-            //    HttpCookie BeautyCookies = new HttpCookie("bbWhcode");
-            //    BeautyCookies.Value = User;
-            //    BeautyCookies.Expires = DateTime.Now.AddDays(1);
-
-            //    Response.Cookies.Add(BeautyCookies);
-            //}
-
             if (POS == "0")
             {
                 try

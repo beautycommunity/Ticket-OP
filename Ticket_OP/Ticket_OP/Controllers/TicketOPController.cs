@@ -15,14 +15,19 @@ namespace Ticket_OP.Controllers
         string userOnline;
         string _POS;
         // GET: TicketBB
-        public ActionResult Index(int page = 1,string Pos = "")
+        public ActionResult Index(int page = 1,string Pos = "", string seach = "", string type = "")
         {
             if (!chkSesionUser(Pos)) { return RedirectToAction("Login", "Login", new { returnUrl = "~/TicketOP/Index" }); }
 
             IQueryable<VW_TICKET> View_Ticket;
 
+            seach = seach.Trim();
+            type = type.Trim();
+
             Data_OPDataContext Context = new Data_OPDataContext();
             Data_UserDataContext C_user = new Data_UserDataContext();
+
+            ViewBag.Type = new SelectList(Context.VW_TICKETs.GroupBy(x => x.TNAME).Select(grp => grp.First()), "TNAME", "TNAME");
 
             List<Ticket> lstTicket = new List<Ticket>();
 
@@ -34,17 +39,25 @@ namespace Ticket_OP.Controllers
 
                 View_Ticket = Context.VW_TICKETs
                     .Where(tik => tik.WHCODE == userOnline)
+                    .Where(tik => tik.AREA.Contains(seach) || tik.WHNAME.Contains(seach) || tik.TICKETNO.Contains(seach))
                     .Where(tik => tik.FLAG == "0")
                     .OrderBy(tik => tik.SS_ID);
             }
             else
             {
                 var sql = C_user.VW_USER_ALLs.Where(x => x.STCODE == userOnline).FirstOrDefault();
+                ViewBag.BRAND = sql.DPCODE;
 
                 View_Ticket = Context.VW_TICKETs
                     .Where(tik => tik.BRAND == sql.DPCODE)
+                    .Where(tik => tik.AREA.Contains(seach) || tik.WHNAME.Contains(seach) || tik.TICKETNO.Contains(seach))
                     .Where(tik => tik.FLAG == "0")
                     .OrderBy(tik => tik.SS_ID);
+            }
+
+            if (type != "")
+            {
+                View_Ticket = View_Ticket.Where(tik => tik.TNAME == type);
             }
 
             foreach (var ux in View_Ticket)
@@ -59,6 +72,7 @@ namespace Ticket_OP.Controllers
                 _ticket.DETAIL = ux.DETAIL;
                 _ticket.SS_ID = ux.SS_ID;
                 _ticket.ST_NAME = ux.TNAME;
+                _ticket.REC_NICKNAME = ux.NICKNAME;
                 _ticket.CREATEDATE = DateTime.Parse(ux.CREATEDATE.ToString()).ToShortDateString();
                 _ticket.CREATETIME = ux.CREATETIME.ToString();
 
@@ -66,6 +80,8 @@ namespace Ticket_OP.Controllers
             }
 
             ViewBag.Pos = _POS;
+            ViewBag.WordSearch = seach;
+            ViewBag.typeSearch = type;
 
             return View(lstTicket.ToPagedList(page, 10));
         }
@@ -92,6 +108,7 @@ namespace Ticket_OP.Controllers
                             select xx).GroupBy(x => x.AREA).Select(grp => grp.First());
 
             newItem.AREA = new SelectList(sql_AREA, "AREA", "AREA");
+            ViewBag.Pos = Pos;
 
             return View(newItem);
         }
@@ -208,7 +225,7 @@ namespace Ticket_OP.Controllers
             return RedirectToAction("Index", "TicketOP", new { Pos = Posi });
         }
 
-        public ActionResult TicketDetail(int TicketId)
+        public ActionResult TicketDetail(int TicketId, string Pos)
         {
             IQueryable<VW_TICKET_DETAIL> View_Ticket;
 
@@ -237,10 +254,11 @@ namespace Ticket_OP.Controllers
                 _ticket.ST_NAME = ux.TNAME;
                 _ticket.CREATEDATE = DateTime.Parse(ux.CREATEDATE.ToString()).ToShortDateString();
                 _ticket.CREATETIME = ux.CREATETIME.ToString();
+                _ticket.REC_NICKNAME = ux.NICKNAME;
 
                 _ticket.ORDERNO = ux.ORDERNO;
                 _ticket.TK_MESAGE = ux.TK_MESAGE;
-                _ticket.US_ID = ux.US_ID;
+                _ticket.US_ID = ux.Expr1;
 
                 //_ticket.POS_NAME = ux.POS_NICKNAME;
                 _ticket.POSTDATE = ux.DETAILDATE.ToString();
@@ -316,7 +334,7 @@ namespace Ticket_OP.Controllers
                 addComment.SS_ID = ux.SS_ID;
             }
             addComment.ticket = lstTicket;
-            ViewBag.Pos = _POS;
+            ViewBag.Pos = Pos;
 
             return View(addComment);
         }
@@ -324,7 +342,9 @@ namespace Ticket_OP.Controllers
         [HttpPost]
         [AllowAnonymous]
         public ActionResult TicketDetail(AddComment commentItem)
-        {          
+        {
+            if (!chkSesionUser("0")) { return RedirectToAction("Login", "Login_Office", new { returnUrl = "~/TicketOP/Index" }); }
+
             int oderNo = idOderno(commentItem.TK_ID);
             //OnUser usr = new OnUser();
 
@@ -332,7 +352,6 @@ namespace Ticket_OP.Controllers
 
             using (Data_OPDataContext Context = new Data_OPDataContext())
             {
-
                 var trnTicketI = new TRN_TICKET_I();
 
                 trnTicketI.TK_ID = commentItem.TK_ID;
@@ -340,6 +359,7 @@ namespace Ticket_OP.Controllers
                 trnTicketI.ORDERNO = (Int16)oderNo;
                 //trnTicketI.US_ID = idUser(userOnline);
                 trnTicketI.CREATEDATE = DateTime.Now;
+                trnTicketI.STCODE = userOnline; 
 
                 Context.TRN_TICKET_Is.InsertOnSubmit(trnTicketI);
                 //Context.SubmitChanges();
@@ -348,7 +368,46 @@ namespace Ticket_OP.Controllers
                 Context.SubmitChanges();
             }
 
-            return RedirectToAction("TicketDetail", "TicketOP", new { TicketId = commentItem.TK_ID });
+            return RedirectToAction("TicketDetail", "TicketOP", new { TicketId = commentItem.TK_ID, Pos = "0" });
+        }
+
+        public ActionResult TicketReceive(int TicketId)
+        {
+            if (!chkSesionUser("0")) { return RedirectToAction("Login", "Login_Office", new { returnUrl = "~/TicketOP/Index" }); }
+
+            using (Data_OPDataContext Context = new Data_OPDataContext())
+            {
+
+                var sql = (from xx in Context.TRN_TICKETs
+                           where xx.TK_ID == TicketId
+                           select xx).FirstOrDefault();
+
+                sql.STCODE = userOnline;
+                sql.SS_ID = 2;
+
+                Context.SubmitChanges();
+            }
+
+            return RedirectToAction("TicketDetail", "TicketOP", new { TicketId = TicketId, Pos = "0" });
+        }
+
+        public ActionResult TicketClose(int TicketId, string Pos)
+        {
+
+            using (Data_OPDataContext Context = new Data_OPDataContext())
+            {
+
+                var sql = (from xx in Context.TRN_TICKETs
+                           where xx.TK_ID == TicketId
+                           select xx).FirstOrDefault();
+
+                //sql.STCODE = userOnline;
+                sql.SS_ID = 3;
+
+                Context.SubmitChanges();
+            }
+
+            return RedirectToAction("TicketDetail", "TicketOP", new { TicketId = TicketId, Pos = Pos });
         }
 
 

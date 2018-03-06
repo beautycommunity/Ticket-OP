@@ -16,7 +16,7 @@
 
         @if (ViewBag.Pos == "1")
         {
-            <a href="@Url.Action("CreateTicket",new { Pos = @ViewBag.Pos })" class="btn btn-primary" align="left"><span class="glyphicon glyphicon-plus"></span>เปิดงานใหม่</a>
+            <a href="@Url.Action("CreateTicket",new { Pos = ViewBag.Pos })" class="btn btn-primary" align="left"><span class="glyphicon glyphicon-plus"></span>เปิดงานใหม่</a>
         }
 
 
@@ -26,11 +26,11 @@
 
         <section id="searchText">
             <div class="well">
-                @using (Html.BeginForm("Home", "Ticket"))
+                @using (Html.BeginForm("Index", "TicketOP"))
                 {
-                    @*@Html.DropDownList("NName", "ผู้รับงาน")
+                    @*@Html.DropDownList("NName", "ผู้รับงาน")*@
 
-                    @Html.DropDownList("Type", "ประเภทงาน")*@
+                    @Html.DropDownList("Type", "ประเภทงาน")
 
                     <input type="search" name="seach" value="@ViewBag.WordSearch" />
                     <button type="submit" class="btn btn-default">ค้นหา <span class="glyphicon glyphicon-search"></span></button>
@@ -76,7 +76,7 @@
 
 @if (Model != null && Model.Count() > 0)
 {
-    @Html.PagedListPager(list, n => Url.Action("Home", new { page = n, seach = ViewBag.WordSearch, NName = ViewBag.NNameSearch, type = ViewBag.typeSearch }))
+    @Html.PagedListPager(list, n => Url.Action("Index", new { page = n, seach = ViewBag.WordSearch, type = ViewBag.typeSearch, Pos = ViewBag.Pos }))
 
     foreach (var _item in Model)
     {
@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    @*@if (_item.REC_NICKNAME != null)
+                    @if (_item.REC_NICKNAME != null)
                     {
                         @Html.LabelFor(m => _item.REC_NICKNAME, new { @class = "col-md control-label" })
 
@@ -131,7 +131,7 @@
                                 @Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })
                                 break;
                         }
-                    }*@
+                    }
                 </div>
 
             </div>
@@ -149,11 +149,11 @@
 
                     @*<div class="col-md-2">
 
-                        @Html.LabelFor(m => _item.WHCODE, new { @class = "col-md control-label" })
-                        <br />
-                        @Html.DisplayFor(m => _item.WHCODE, new { @class = "form-control" })
+            @Html.LabelFor(m => _item.WHCODE, new { @class = "col-md control-label" })
+            <br />
+            @Html.DisplayFor(m => _item.WHCODE, new { @class = "form-control" })
 
-                    </div>*@
+        </div>*@
 
                     <div class="col-md-1">
 
@@ -168,7 +168,10 @@
                         <br />
                         @Html.DisplayFor(m => _item.AREA, new { @class = "form-control" })
                     </div>
+                    <div class="col-md-1">
 
+
+                    </div>
                     <div class="col-md-1">
 
                         @Html.LabelFor(m => _item.CREATEDATE, new { @class = "col-md control-label" })
@@ -183,28 +186,22 @@
                         @Html.DisplayFor(m => _item.CREATETIME, new { @class = "form-control" })
 
                     </div>
-                    @*<div class="col-md-1">
-
-                            @Html.LabelFor(m => _item.REC_NICKNAME, new { @class = "col-md control-label" })
-                            <br />
-                            @Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })
-
-                    </div>*@
 
 
-                    <div class="col-md-2">
+
+                    <div class="col-md-1">
 
                     </div>
                     <div class="col-md-1">
                         <br />
-                        <input type="button" value="รายละเอียด" id=_item.TICKETNO class="btn btn-primary" onclick="location.href='@Url.Action("TicketDetail", "TicketOP",new { TicketId = _item.TK_ID })'" />
+                        <input type="button" value="รายละเอียด" id=_item.TICKETNO class="btn btn-primary" onclick="location.href='@Url.Action("TicketDetail", "TicketOP",new { TicketId = _item.TK_ID, Pos = @ViewBag.Pos })'" />
                     </div>
                     <div class="col-md-1">
                         <br />
                         @*@if (_item.SS_ID < 2 && ViewBag.UserDepId == 13)
-                        {
-                            <input type="button" value="รับงาน" id=_item.TICKETNO class="btn btn-success" onclick="location.href='@Url.Action("TicketReceive", "Ticket",new { TicketId = _item.TK_ID })'" />
-                        }*@
+            {
+                <input type="button" value="รับงาน" id=_item.TICKETNO class="btn btn-success" onclick="location.href='@Url.Action("TicketReceive", "Ticket",new { TicketId = _item.TK_ID })'" />
+            }*@
                     </div>
                 </div>
 
@@ -213,7 +210,7 @@
         </div>
     }
 
-    @Html.PagedListPager(list, n => Url.Action("Home", new { page = n, seach = ViewBag.WordSearch }))
+    @Html.PagedListPager(list, n => Url.Action("Home", new { page = n, seach = ViewBag.WordSearch, type = ViewBag.typeSearch, Pos = ViewBag.Pos }))
 }
 else
 {

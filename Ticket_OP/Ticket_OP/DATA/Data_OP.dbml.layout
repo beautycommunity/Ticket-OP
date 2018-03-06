@@ -20,34 +20,34 @@
         <elementListCompartment Id="5c02fe02-562c-45ce-a82b-70a1cb1aeddb" absoluteBounds="5.14, 0.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="e39cdbb8-4604-4c76-8dc7-9eff8321d47a" absoluteBounds="2.75, 2.125, 2, 3.3093082682291666">
-      <DataClassMoniker Name="/Data_OPDataContext/VW_TICKET" />
-      <nestedChildShapes>
-        <elementListCompartment Id="5dd37cdc-1d9f-4e2d-a1f4-9c062d6f31d7" absoluteBounds="2.765, 2.585, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="2f19f544-3c01-4587-8bd4-242c07026f86" absoluteBounds="0.5, 2.875, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/Data_OPDataContext/TRN_TICKET_I" />
-      <nestedChildShapes>
-        <elementListCompartment Id="fd6a5f4e-b4f3-451e-b877-c5bd0195fbc0" absoluteBounds="0.51499999999999968, 3.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="10dd56a4-5742-4d7c-8528-859ae43daa52" absoluteBounds="0.5, 4.875, 2, 1.9631982421875">
       <DataClassMoniker Name="/Data_OPDataContext/TRN_TICKET_F" />
       <nestedChildShapes>
         <elementListCompartment Id="c6238e52-a82c-4fee-addd-7b0156781080" absoluteBounds="0.51500000000000012, 5.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="0a1c3a6e-4d47-4141-9529-f723e1105ded" absoluteBounds="5.125, 3.625, 2, 4.0785139973958326">
-      <DataClassMoniker Name="/Data_OPDataContext/VW_TICKET_DETAIL" />
-      <nestedChildShapes>
-        <elementListCompartment Id="1686a7f6-b152-4c40-9719-5db5aee2022b" absoluteBounds="5.14, 4.085, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="ab561c97-61c9-43f6-96a4-7edfd35ac392" absoluteBounds="2.75, 5.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/Data_OPDataContext/DEV_TASK_FLAG" />
       <nestedChildShapes>
         <elementListCompartment Id="b7c78793-d9da-46dc-93f2-2fdfa1074b85" absoluteBounds="2.765, 6.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="91390170-f897-42be-9bdd-f8330ba0fbe6" absoluteBounds="0.5, 2.875, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/Data_OPDataContext/TRN_TICKET_I" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bd918ace-6617-4d9d-bbed-4ded37a8f945" absoluteBounds="0.51499999999999968, 3.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3740209c-0337-42dd-a22e-a4edba5939f7" absoluteBounds="5.125, 3.5, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/Data_OPDataContext/VW_TICKET_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9d06785f-c19c-44fe-96d0-2e99c57e8e0d" absoluteBounds="5.14, 3.96, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e004d2a6-85d6-4d5d-8323-1a36204ebe6a" absoluteBounds="2.75, 2.125, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/Data_OPDataContext/VW_TICKET" />
+      <nestedChildShapes>
+        <elementListCompartment Id="17e7e8c5-4b53-4f03-a3bf-6ab2eb31dfca" absoluteBounds="2.765, 2.585, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

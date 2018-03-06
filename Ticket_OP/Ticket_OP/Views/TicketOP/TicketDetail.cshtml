@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    @*@if (_item.REC_NICKNAME != null)
+                    @if (_item.REC_NICKNAME != null)
                     {
                         @Html.LabelFor(m => _item.REC_NICKNAME, new { @class = "col-md control-label" })
 
@@ -135,7 +135,7 @@
                                 @Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })
                                 break;
                         }
-                    }*@
+                    }
                 </div>
 
             </div>
@@ -167,7 +167,7 @@
 
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         @Html.LabelFor(m => _item.AREA, new { @class = "col-md control-label" })
                         <br />
                         @Html.DisplayFor(m => _item.AREA, new { @class = "form-control" })
@@ -187,28 +187,20 @@
                         @Html.DisplayFor(m => _item.CREATETIME, new { @class = "form-control" })
 
                     </div>
-                    @*<div class="col-md-1">
-
-                            @Html.LabelFor(m => _item.REC_NICKNAME, new { @class = "col-md control-label" })
-                            <br />
-                            @Html.DisplayFor(m => _item.REC_NICKNAME, new { @class = "form-control" })
-
-                    </div>*@
-
-
                     <div class="col-md-2">
 
                     </div>
+
                     <div class="col-md-1">
                         <br />
-                        @*<input type="button" value="รายละเอียด" id=_item.TICKETNO class="btn btn-primary" onclick="location.href='@Url.Action("TicketDetail", "Ticket",new { TicketId = _item.TK_ID })'" />*@
-                    </div>
-                    <div class="col-md-1">
-                        <br />
-                        @*@if (_item.SS_ID < 2 && ViewBag.UserDepId == 13)
+                        @if (ViewBag.Pos == "0" && _item.SS_ID == 1)
                         {
-                            <input type="button" value="รับงาน" id=_item.TICKETNO class="btn btn-success" onclick="location.href='@Url.Action("TicketReceive", "Ticket",new { TicketId = _item.TK_ID })'" />
-                        }*@
+                            <input type="button" value="รับงาน" id=_item.TICKETNO class="btn btn-success" onclick="location.href='@Url.Action("TicketReceive", "TicketOP",new { TicketId = _item.TK_ID })'" />
+                        }
+                        @if (_item.SS_ID == 2)
+                        {
+                            <input type="button" value="ปิดงาน" id=_item.TICKETNO class="btn btn-success" onclick="location.href='@Url.Action("TicketClose", "TicketOP",new { TicketId = _item.TK_ID, Pos = @ViewBag.Pos })'" />
+                        }
                     </div>
                 </div>
 
@@ -329,7 +321,7 @@
 
                         <div class="col-md-2">
                             @Html.LabelFor(m => _item.POS_NAME, new { @class = "col-md control-label" })
-                            @Html.DisplayFor(m => _item.POS_NAME, new { @class = "form-control" })
+                            @Html.DisplayFor(m => _item.US_ID, new { @class = "form-control" })
 
                         </div>
 
@@ -351,8 +343,8 @@
     <br />
 
     <hr />
-    @*@if (Model.SS_ID > 0)
-    {*@
+    @if (ViewBag.Pos == "0")
+    {
         <div class="row">
 
             <div class="col-md-6">
@@ -380,7 +372,7 @@
                 </section>
             </div>
         </div>
-    @*}*@
+    }
 
 @section Scripts {
 

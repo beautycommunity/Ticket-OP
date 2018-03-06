@@ -90,6 +90,9 @@ namespace Ticket_OP.Models
         [Display(Name = "วันที่")]
         public string POSTDATE { get; set; }
 
+        [Display(Name = "ผู็รับงาน")]
+        public string REC_NICKNAME { get; set; }
+
         public int? ORDERNO { get; set; }
         public string US_ID { get; set; }
 
