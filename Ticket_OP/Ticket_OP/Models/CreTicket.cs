@@ -92,6 +92,28 @@ namespace Ticket_OP.Models
 
         public int? ORDERNO { get; set; }
         public string US_ID { get; set; }
+
+
+        public string FLS { get; set; }
+
+        public string FLS_I { get; set; }
+
+        public string FLS_H_1 { get; set; }
+        public string FLS_H_2 { get; set; }
+        public string FLS_H_3 { get; set; }
+        public string FLS_H_1_Name { get; set; }
+        public string FLS_H_2_Name { get; set; }
+        public string FLS_H_3_Name { get; set; }
+
+        public string FLS_I_1 { get; set; }
+        public string FLS_I_2 { get; set; }
+        public string FLS_I_3 { get; set; }
+        public string FLAG_1 { get; set; }
+        public string FLAG_2 { get; set; }
+        public string FLAG_3 { get; set; }
+        public string IMG_1 { get; set; }
+        public string IMG_2 { get; set; }
+        public string IMG_3 { get; set; }
     }
 
     public class AddComment

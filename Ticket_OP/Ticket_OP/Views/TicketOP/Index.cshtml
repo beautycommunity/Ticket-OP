@@ -14,7 +14,11 @@
     <div class="col-md-6">
         <h2>Home Ticket @ViewBag.BRAND </h2>
 
-        <a href="@Url.Action("CreateTicket")" class="btn btn-primary" align="left"><span class="glyphicon glyphicon-plus"></span>เปิดงานใหม่</a>
+        @if (ViewBag.Pos == "1")
+        {
+            <a href="@Url.Action("CreateTicket",new { Pos = @ViewBag.Pos })" class="btn btn-primary" align="left"><span class="glyphicon glyphicon-plus"></span>เปิดงานใหม่</a>
+        }
+
 
     </div>
     <br />

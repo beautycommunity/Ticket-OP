@@ -45,6 +45,9 @@ namespace Ticket_OP.DATA
     partial void InsertTRN_TICKET_F(TRN_TICKET_F instance);
     partial void UpdateTRN_TICKET_F(TRN_TICKET_F instance);
     partial void DeleteTRN_TICKET_F(TRN_TICKET_F instance);
+    partial void InsertDEV_TASK_FLAG(DEV_TASK_FLAG instance);
+    partial void UpdateDEV_TASK_FLAG(DEV_TASK_FLAG instance);
+    partial void DeleteDEV_TASK_FLAG(DEV_TASK_FLAG instance);
     #endregion
 		
 		public Data_OPDataContext() : 
@@ -117,6 +120,14 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
+		public System.Data.Linq.Table<TRN_TICKET_F> TRN_TICKET_Fs
+		{
+			get
+			{
+				return this.GetTable<TRN_TICKET_F>();
+			}
+		}
+		
 		public System.Data.Linq.Table<VW_TICKET_DETAIL> VW_TICKET_DETAILs
 		{
 			get
@@ -125,11 +136,11 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		public System.Data.Linq.Table<TRN_TICKET_F> TRN_TICKET_Fs
+		public System.Data.Linq.Table<DEV_TASK_FLAG> DEV_TASK_FLAGs
 		{
 			get
 			{
-				return this.GetTable<TRN_TICKET_F>();
+				return this.GetTable<DEV_TASK_FLAG>();
 			}
 		}
 	}
@@ -1129,6 +1140,188 @@ namespace Ticket_OP.DATA
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRN_TICKET_F")]
+	public partial class TRN_TICKET_F : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TK_ID;
+		
+		private short _ORDERNO;
+		
+		private int _FILENO;
+		
+		private string _PATH1;
+		
+		private string _PATH2;
+		
+		private string _PATH3;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTK_IDChanging(int value);
+    partial void OnTK_IDChanged();
+    partial void OnORDERNOChanging(short value);
+    partial void OnORDERNOChanged();
+    partial void OnFILENOChanging(int value);
+    partial void OnFILENOChanged();
+    partial void OnPATH1Changing(string value);
+    partial void OnPATH1Changed();
+    partial void OnPATH2Changing(string value);
+    partial void OnPATH2Changed();
+    partial void OnPATH3Changing(string value);
+    partial void OnPATH3Changed();
+    #endregion
+		
+		public TRN_TICKET_F()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int TK_ID
+		{
+			get
+			{
+				return this._TK_ID;
+			}
+			set
+			{
+				if ((this._TK_ID != value))
+				{
+					this.OnTK_IDChanging(value);
+					this.SendPropertyChanging();
+					this._TK_ID = value;
+					this.SendPropertyChanged("TK_ID");
+					this.OnTK_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="SmallInt NOT NULL", IsPrimaryKey=true)]
+		public short ORDERNO
+		{
+			get
+			{
+				return this._ORDERNO;
+			}
+			set
+			{
+				if ((this._ORDERNO != value))
+				{
+					this.OnORDERNOChanging(value);
+					this.SendPropertyChanging();
+					this._ORDERNO = value;
+					this.SendPropertyChanged("ORDERNO");
+					this.OnORDERNOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FILENO", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FILENO
+		{
+			get
+			{
+				return this._FILENO;
+			}
+			set
+			{
+				if ((this._FILENO != value))
+				{
+					this.OnFILENOChanging(value);
+					this.SendPropertyChanging();
+					this._FILENO = value;
+					this.SendPropertyChanged("FILENO");
+					this.OnFILENOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH1", DbType="VarChar(1000)")]
+		public string PATH1
+		{
+			get
+			{
+				return this._PATH1;
+			}
+			set
+			{
+				if ((this._PATH1 != value))
+				{
+					this.OnPATH1Changing(value);
+					this.SendPropertyChanging();
+					this._PATH1 = value;
+					this.SendPropertyChanged("PATH1");
+					this.OnPATH1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH2", DbType="VarChar(1000)")]
+		public string PATH2
+		{
+			get
+			{
+				return this._PATH2;
+			}
+			set
+			{
+				if ((this._PATH2 != value))
+				{
+					this.OnPATH2Changing(value);
+					this.SendPropertyChanging();
+					this._PATH2 = value;
+					this.SendPropertyChanged("PATH2");
+					this.OnPATH2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH3", DbType="VarChar(1000)")]
+		public string PATH3
+		{
+			get
+			{
+				return this._PATH3;
+			}
+			set
+			{
+				if ((this._PATH3 != value))
+				{
+					this.OnPATH3Changing(value);
+					this.SendPropertyChanging();
+					this._PATH3 = value;
+					this.SendPropertyChanged("PATH3");
+					this.OnPATH3Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_TICKET_DETAIL")]
 	public partial class VW_TICKET_DETAIL
 	{
@@ -1159,7 +1352,7 @@ namespace Ticket_OP.DATA
 		
 		private string _FLAG;
 		
-		private System.Nullable<int> _ORDERNO;
+		private int _ORDERNO;
 		
 		private string _TK_MESAGE;
 		
@@ -1379,8 +1572,8 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="Int")]
-		public System.Nullable<int> ORDERNO
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="Int NOT NULL")]
+		public int ORDERNO
 		{
 			get
 			{
@@ -1395,7 +1588,7 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_MESAGE", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_MESAGE", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string TK_MESAGE
 		{
 			get
@@ -1444,163 +1637,115 @@ namespace Ticket_OP.DATA
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRN_TICKET_F")]
-	public partial class TRN_TICKET_F : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DEV_TASK_FLAG")]
+	public partial class DEV_TASK_FLAG : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _TK_ID;
+		private int _ID;
 		
-		private short _ORDERNO;
+		private string _Type_name;
 		
-		private int _FILENO;
+		private System.Nullable<int> _FLAG;
 		
-		private string _PATH1;
-		
-		private string _PATH2;
-		
-		private string _PATH3;
+		private string _File_img;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnTK_IDChanging(int value);
-    partial void OnTK_IDChanged();
-    partial void OnORDERNOChanging(short value);
-    partial void OnORDERNOChanged();
-    partial void OnFILENOChanging(int value);
-    partial void OnFILENOChanged();
-    partial void OnPATH1Changing(string value);
-    partial void OnPATH1Changed();
-    partial void OnPATH2Changing(string value);
-    partial void OnPATH2Changed();
-    partial void OnPATH3Changing(string value);
-    partial void OnPATH3Changed();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnType_nameChanging(string value);
+    partial void OnType_nameChanged();
+    partial void OnFLAGChanging(System.Nullable<int> value);
+    partial void OnFLAGChanged();
+    partial void OnFile_imgChanging(string value);
+    partial void OnFile_imgChanged();
     #endregion
 		
-		public TRN_TICKET_F()
+		public DEV_TASK_FLAG()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TK_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int TK_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID
 		{
 			get
 			{
-				return this._TK_ID;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._TK_ID != value))
+				if ((this._ID != value))
 				{
-					this.OnTK_IDChanging(value);
+					this.OnIDChanging(value);
 					this.SendPropertyChanging();
-					this._TK_ID = value;
-					this.SendPropertyChanged("TK_ID");
-					this.OnTK_IDChanged();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERNO", DbType="SmallInt NOT NULL", IsPrimaryKey=true)]
-		public short ORDERNO
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type_name", DbType="VarChar(10)")]
+		public string Type_name
 		{
 			get
 			{
-				return this._ORDERNO;
+				return this._Type_name;
 			}
 			set
 			{
-				if ((this._ORDERNO != value))
+				if ((this._Type_name != value))
 				{
-					this.OnORDERNOChanging(value);
+					this.OnType_nameChanging(value);
 					this.SendPropertyChanging();
-					this._ORDERNO = value;
-					this.SendPropertyChanged("ORDERNO");
-					this.OnORDERNOChanged();
+					this._Type_name = value;
+					this.SendPropertyChanged("Type_name");
+					this.OnType_nameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FILENO", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int FILENO
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLAG", DbType="Int")]
+		public System.Nullable<int> FLAG
 		{
 			get
 			{
-				return this._FILENO;
+				return this._FLAG;
 			}
 			set
 			{
-				if ((this._FILENO != value))
+				if ((this._FLAG != value))
 				{
-					this.OnFILENOChanging(value);
+					this.OnFLAGChanging(value);
 					this.SendPropertyChanging();
-					this._FILENO = value;
-					this.SendPropertyChanged("FILENO");
-					this.OnFILENOChanged();
+					this._FLAG = value;
+					this.SendPropertyChanged("FLAG");
+					this.OnFLAGChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH1", DbType="VarChar(1000)")]
-		public string PATH1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_File_img", DbType="VarChar(255)")]
+		public string File_img
 		{
 			get
 			{
-				return this._PATH1;
+				return this._File_img;
 			}
 			set
 			{
-				if ((this._PATH1 != value))
+				if ((this._File_img != value))
 				{
-					this.OnPATH1Changing(value);
+					this.OnFile_imgChanging(value);
 					this.SendPropertyChanging();
-					this._PATH1 = value;
-					this.SendPropertyChanged("PATH1");
-					this.OnPATH1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH2", DbType="VarChar(1000)")]
-		public string PATH2
-		{
-			get
-			{
-				return this._PATH2;
-			}
-			set
-			{
-				if ((this._PATH2 != value))
-				{
-					this.OnPATH2Changing(value);
-					this.SendPropertyChanging();
-					this._PATH2 = value;
-					this.SendPropertyChanged("PATH2");
-					this.OnPATH2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH3", DbType="VarChar(1000)")]
-		public string PATH3
-		{
-			get
-			{
-				return this._PATH3;
-			}
-			set
-			{
-				if ((this._PATH3 != value))
-				{
-					this.OnPATH3Changing(value);
-					this.SendPropertyChanging();
-					this._PATH3 = value;
-					this.SendPropertyChanged("PATH3");
-					this.OnPATH3Changed();
+					this._File_img = value;
+					this.SendPropertyChanged("File_img");
+					this.OnFile_imgChanged();
 				}
 			}
 		}

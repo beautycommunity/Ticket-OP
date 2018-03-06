@@ -22,7 +22,7 @@
 
         <section id="newTicket">
 
-            @using (Html.BeginForm("CreateTicket", "TicketOP", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("CreateTicket", "TicketOP", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", Pos = @ViewBag.Pos }))
             {
                 @*@Html.TextBoxFor(m => m.US_ID, new { @class = "hidden" })*@
                 <hr />

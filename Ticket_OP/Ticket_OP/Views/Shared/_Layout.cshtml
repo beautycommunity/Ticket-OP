@@ -47,8 +47,15 @@
                     {
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> @Session["SharedName"] <b class="caret"></b></a>
-                            <ul class="dropdown-menu multi-level">
-                                <li>@Html.ActionLink("ออกจากระบบ", "Logout", "Login")</li>
+                            <ul class="dropdown-menu multi-level">                  
+                                @if (Session["POS"] == "1")
+                                {
+                                    <li>@Html.ActionLink("ออกจากระบบ", "Logout", "Login")</li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("ออกจากระบบ", "Logout_Office", "Login")</li>
+                                }
                             </ul>
                         </li>
                     }

@@ -13,25 +13,39 @@ namespace Ticket_OP.Controllers
     public class TicketOPController : Controller
     {
         string userOnline;
+        string _POS;
         // GET: TicketBB
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 1,string Pos = "")
         {
-            if (!chkSesionUser()) { return RedirectToAction("Login", "Login", new { returnUrl = "~/TicketOP/Index" }); }
+            if (!chkSesionUser(Pos)) { return RedirectToAction("Login", "Login", new { returnUrl = "~/TicketOP/Index" }); }
 
             IQueryable<VW_TICKET> View_Ticket;
 
             Data_OPDataContext Context = new Data_OPDataContext();
+            Data_UserDataContext C_user = new Data_UserDataContext();
 
             List<Ticket> lstTicket = new List<Ticket>();
 
             //string a = userOnline;
-            var queryX = Context.MAS_WHs.Where(x => x.WHCODE == userOnline).FirstOrDefault();
-            ViewBag.BRAND = queryX.BRAND;
+            if(_POS == "1")
+            {
+                var queryX = Context.MAS_WHs.Where(x => x.WHCODE == userOnline).FirstOrDefault();
+                ViewBag.BRAND = queryX.BRAND;
 
-            View_Ticket = Context.VW_TICKETs
-                .Where(tik => tik.WHCODE == userOnline)
-                .Where(tik => tik.FLAG == "0")
-                .OrderBy(tik => tik.SS_ID);
+                View_Ticket = Context.VW_TICKETs
+                    .Where(tik => tik.WHCODE == userOnline)
+                    .Where(tik => tik.FLAG == "0")
+                    .OrderBy(tik => tik.SS_ID);
+            }
+            else
+            {
+                var sql = C_user.VW_USER_ALLs.Where(x => x.STCODE == userOnline).FirstOrDefault();
+
+                View_Ticket = Context.VW_TICKETs
+                    .Where(tik => tik.BRAND == sql.DPCODE)
+                    .Where(tik => tik.FLAG == "0")
+                    .OrderBy(tik => tik.SS_ID);
+            }
 
             foreach (var ux in View_Ticket)
             {
@@ -51,13 +65,15 @@ namespace Ticket_OP.Controllers
                 lstTicket.Add(_ticket);
             }
 
+            ViewBag.Pos = _POS;
+
             return View(lstTicket.ToPagedList(page, 10));
         }
 
         //Get : Create Ticket
-        public ActionResult CreateTicket()
+        public ActionResult CreateTicket(string Pos = "1")
         {
-            if (!chkSesionUser()) { return RedirectToAction("Login", "Login", new { returnUrl = "~/TicketOP/Index" }); }
+            if (!chkSesionUser(Pos)) { return RedirectToAction("Login", "Login", new { returnUrl = "~/TicketOP/Index" }); }
 
             Data_OPDataContext Context = new Data_OPDataContext();
 
@@ -84,9 +100,9 @@ namespace Ticket_OP.Controllers
         //POST: Create Ticket
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult CreateTicket(CreTicket newItem)
+        public ActionResult CreateTicket(CreTicket newItem,string Pos = "1")
         {
-            if (!chkSesionUser()) { return RedirectToAction("Login", "Login", new { returnUrl = "~/TicketOP/Index" }); }
+            if (!chkSesionUser(Pos)) { return RedirectToAction("Login", "Login", new { returnUrl = "~/TicketOP/Index" }); }
 
             Ticket ticket = new Ticket();
 
@@ -188,8 +204,8 @@ namespace Ticket_OP.Controllers
 
                 //SendMail(ticket);
             }
-
-            return RedirectToAction("Index", "TicketOP");
+            string Posi = Pos;
+            return RedirectToAction("Index", "TicketOP", new { Pos = Posi });
         }
 
         public ActionResult TicketDetail(int TicketId)
@@ -229,6 +245,70 @@ namespace Ticket_OP.Controllers
                 //_ticket.POS_NAME = ux.POS_NICKNAME;
                 _ticket.POSTDATE = ux.DETAILDATE.ToString();
 
+                _ticket.FLS = flsPath(ux.TK_ID, 1);
+                //_ticket.FLS_I = flsPath(ux.TK_ID, 1, (Int16)ux.ORDERNO);
+                _ticket.FLS_H_1 = flsPath(ux.TK_ID, 1);
+                _ticket.FLS_H_2 = flsPath(ux.TK_ID, 2);
+                _ticket.FLS_H_3 = flsPath(ux.TK_ID, 3);
+
+                try
+                {
+                    _ticket.FLS_H_1_Name = _ticket.FLS_H_1.Substring(14, _ticket.FLS_H_1.Length - 14);
+                    String[] substrings_1 = _ticket.FLS_H_1.Split('.');
+                    int num_1 = substrings_1.Length;
+                    string check_1 = substrings_1[num_1 - 1];
+                    var sql_1 = (from xx in Context.DEV_TASK_FLAGs
+                                 where xx.Type_name == check_1
+                                 select xx).FirstOrDefault();
+                    if (sql_1.FLAG == 1)
+                    {
+                        _ticket.FLAG_1 = "1";
+                    }
+                    else
+                    {
+                        _ticket.FLAG_1 = "2";
+                        _ticket.IMG_1 = sql_1.File_img;
+                    }
+
+                    _ticket.FLS_H_2_Name = _ticket.FLS_H_2.Substring(14, _ticket.FLS_H_2.Length - 14);
+                    String[] substrings_2 = _ticket.FLS_H_2.Split('.');
+                    int num_2 = substrings_2.Length;
+                    string check_2 = substrings_2[num_2 - 1];
+                    var sql_2 = (from xx in Context.DEV_TASK_FLAGs
+                                 where xx.Type_name == check_2
+                                 select xx).FirstOrDefault();
+                    if (sql_2.FLAG == 1)
+                    {
+                        _ticket.FLAG_2 = "1";
+                    }
+                    else
+                    {
+                        _ticket.FLAG_2 = "2";
+                        _ticket.IMG_2 = sql_2.File_img;
+                    }
+
+                    _ticket.FLS_H_3_Name = _ticket.FLS_H_3.Substring(14, _ticket.FLS_H_3.Length - 14);
+                    String[] substrings_3 = _ticket.FLS_H_3.Split('.');
+                    int num_3 = substrings_3.Length;
+                    string check_3 = substrings_3[num_3 - 1];
+                    var sql_3 = (from xx in Context.DEV_TASK_FLAGs
+                                 where xx.Type_name == check_3
+                                 select xx).FirstOrDefault();
+                    if (sql_3.FLAG == 1)
+                    {
+                        _ticket.FLAG_3 = "1";
+                    }
+                    else
+                    {
+                        _ticket.FLAG_3 = "2";
+                        _ticket.IMG_3 = sql_3.File_img;
+                    }
+                }
+                catch
+                {
+
+                }
+
 
                 lstTicket.Add(_ticket);
                 addComment.TK_ID = ux.TK_ID;
@@ -236,6 +316,7 @@ namespace Ticket_OP.Controllers
                 addComment.SS_ID = ux.SS_ID;
             }
             addComment.ticket = lstTicket;
+            ViewBag.Pos = _POS;
 
             return View(addComment);
         }
@@ -271,7 +352,58 @@ namespace Ticket_OP.Controllers
         }
 
 
-        /*------------------------------------------------------------- Login ------------------------------------------------*/
+        /*------------------------------------------------------------- Funtion ------------------------------------------------*/
+
+        private string flsPath(int tkId, int atFilePosition, Int16 odr = 0)
+        {
+            string path = "";
+
+            using (Data_OPDataContext searchContext = new Data_OPDataContext())
+            {
+                var queryX = searchContext.TRN_TICKET_Fs
+                          .Where(s => s.TK_ID == tkId && s.ORDERNO == odr)
+                          .FirstOrDefault();
+
+                switch (atFilePosition)
+                {
+                    case 1:
+                        try
+                        {
+                            path = queryX.PATH1;
+                        }
+                        catch
+                        {
+                            path = "";
+                        }
+                        break;
+                    case 2:
+                        try
+                        {
+                            path = queryX.PATH2;
+                        }
+                        catch
+                        {
+                            path = "";
+                        }
+                        break;
+                    case 3:
+                        try
+                        {
+                            path = queryX.PATH3;
+                        }
+                        catch
+                        {
+                            path = "";
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return path;
+        }
 
         private string ticketNo(string Bread)
         {
@@ -352,11 +484,14 @@ namespace Ticket_OP.Controllers
             return id;
         }
 
-        public bool chkSesionUser()
+        /*------------------------------------------------------------- Login ------------------------------------------------*/
+
+        public bool chkSesionUser(string Pos)
         {
             bool chk = true;
 
-            userOnline = GetCookie();
+            userOnline = GetCookie(Pos);
+            _POS = Pos;
 
             if (userOnline == string.Empty)
             {
@@ -374,27 +509,57 @@ namespace Ticket_OP.Controllers
                 }
             }
 
-            using (Data_OPDataContext Context = new Data_OPDataContext())
+            if(Pos == "1")
             {
-                try
+                using (Data_OPDataContext Context = new Data_OPDataContext())
                 {
-                    var sql = (from xx in Context.MAS_WHs
-                               where xx.WHCODE == userOnline
-                               select xx).FirstOrDefault();
-
-                    if (sql != null)
+                    try
                     {
-                        Session["SharedName"] = "สวัสดี " + sql.FULLNAME;
-                        Session["Name"] = sql.WHNAME;
+                        var sql = (from xx in Context.MAS_WHs
+                                   where xx.WHCODE == userOnline
+                                   select xx).FirstOrDefault();
+
+                        if (sql != null)
+                        {
+                            Session["SharedName"] = "สวัสดี " + sql.FULLNAME;
+                            Session["Name"] = sql.WHNAME;
+                            Session["POS"] = "1";
+                        }
+                        else
+                        {
+                            Session["SharedName"] = "เข้าสู่ระบบ";
+                        }
                     }
-                    else
+                    catch
                     {
                         Session["SharedName"] = "เข้าสู่ระบบ";
                     }
                 }
-                catch
+            }else if(Pos == "0")
+            {
+                using (Data_UserDataContext Context = new Data_UserDataContext())
                 {
-                    Session["SharedName"] = "เข้าสู่ระบบ";
+                    try
+                    {
+                        var sql = (from xx in Context.MAS_USERs
+                                   where xx.STCODE == userOnline
+                                   select xx).FirstOrDefault();
+
+                        if (sql != null)
+                        {
+                            Session["SharedName"] = "สวัสดี " + sql.FNAME;
+                            Session["Name"] = sql.FNAME;
+                            Session["POS"] = "0";
+                        }
+                        else
+                        {
+                            Session["SharedName"] = "เข้าสู่ระบบ";
+                        }
+                    }
+                    catch
+                    {
+                        Session["SharedName"] = "เข้าสู่ระบบ";
+                    }
                 }
             }
 
@@ -403,28 +568,75 @@ namespace Ticket_OP.Controllers
 
         private void SetCookie(string User)
         {
+
             try
             {
-                Request.Cookies["bbStcode"].Value = User;
+                Request.Cookies["bbWhcode"].Value = User;
             }
             catch
             {
-                HttpCookie BeautyCookies = new HttpCookie("bbStcode");
+                HttpCookie BeautyCookies = new HttpCookie("bbWhcode");
                 BeautyCookies.Value = User;
                 BeautyCookies.Expires = DateTime.Now.AddDays(1);
 
                 Response.Cookies.Add(BeautyCookies);
             }
+
+            //if (_POS == "0")
+            //{
+            //    try
+            //    {
+            //        Request.Cookies["bbStcode"].Value = User;
+            //    }
+            //    catch
+            //    {
+            //        HttpCookie BeautyCookies = new HttpCookie("bbStcode");
+            //        BeautyCookies.Value = User;
+            //        BeautyCookies.Expires = DateTime.Now.AddDays(1);
+
+            //        Response.Cookies.Add(BeautyCookies);
+            //    }
+            //}
+            //else
+            //{
+            //    try
+            //    {
+            //        Request.Cookies["bbWhcode"].Value = User;
+            //    }
+            //    catch
+            //    {
+            //        HttpCookie BeautyCookies = new HttpCookie("bbWhcode");
+            //        BeautyCookies.Value = User;
+            //        BeautyCookies.Expires = DateTime.Now.AddDays(1);
+
+            //        Response.Cookies.Add(BeautyCookies);
+            //    }
+            //}
             //Request.Cookies["bbStcode"].Value = User;   
         }
 
-        private string GetCookie()
+        private string GetCookie(string POS)
         {
             string cookievalue = string.Empty;
 
-            if (Request.Cookies["bbStcode"] != null)
+            //if (Request.Cookies["bbWhcode"] != null)
+            //{
+            //    cookievalue = Request.Cookies["bbWhcode"].Value.ToString();
+            //}
+
+            if (POS == "1")
             {
-                cookievalue = Request.Cookies["bbStcode"].Value.ToString();
+                if (Request.Cookies["bbWhcode"] != null)
+                {
+                    cookievalue = Request.Cookies["bbWhcode"].Value.ToString();
+                }
+            }
+            else
+            {
+                if (Request.Cookies["bbStcode"] != null)
+                {
+                    cookievalue = Request.Cookies["bbStcode"].Value.ToString();
+                }
             }
 
             return cookievalue;

@@ -22,7 +22,7 @@ namespace Ticket_OP.DATA
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="OPTicket")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="BeautyTicket-Live")]
 	public partial class Data_UserDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,16 +30,16 @@ namespace Ticket_OP.DATA
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertMAS_USER(MAS_USER instance);
-    partial void UpdateMAS_USER(MAS_USER instance);
-    partial void DeleteMAS_USER(MAS_USER instance);
     partial void InsertMAS_DEP(MAS_DEP instance);
     partial void UpdateMAS_DEP(MAS_DEP instance);
     partial void DeleteMAS_DEP(MAS_DEP instance);
+    partial void InsertMAS_USER(MAS_USER instance);
+    partial void UpdateMAS_USER(MAS_USER instance);
+    partial void DeleteMAS_USER(MAS_USER instance);
     #endregion
 		
 		public Data_UserDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["OPTicketConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BeautyTicket_LiveConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -68,14 +68,6 @@ namespace Ticket_OP.DATA
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<MAS_USER> MAS_USERs
-		{
-			get
-			{
-				return this.GetTable<MAS_USER>();
-			}
-		}
-		
 		public System.Data.Linq.Table<MAS_USER_A> MAS_USER_As
 		{
 			get
@@ -89,6 +81,303 @@ namespace Ticket_OP.DATA
 			get
 			{
 				return this.GetTable<MAS_DEP>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MAS_USER> MAS_USERs
+		{
+			get
+			{
+				return this.GetTable<MAS_USER>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_USER_ALL> VW_USER_ALLs
+		{
+			get
+			{
+				return this.GetTable<VW_USER_ALL>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MAS_USER_A")]
+	public partial class MAS_USER_A
+	{
+		
+		private int _US_ID;
+		
+		private string _ANAME;
+		
+		private string _CFLAG;
+		
+		private string _createcode;
+		
+		private System.Nullable<System.DateTime> _createdate;
+		
+		public MAS_USER_A()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_US_ID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int US_ID
+		{
+			get
+			{
+				return this._US_ID;
+			}
+			set
+			{
+				if ((this._US_ID != value))
+				{
+					this._US_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ANAME", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ANAME
+		{
+			get
+			{
+				return this._ANAME;
+			}
+			set
+			{
+				if ((this._ANAME != value))
+				{
+					this._ANAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CFLAG", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string CFLAG
+		{
+			get
+			{
+				return this._CFLAG;
+			}
+			set
+			{
+				if ((this._CFLAG != value))
+				{
+					this._CFLAG = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createcode", DbType="NVarChar(20)")]
+		public string createcode
+		{
+			get
+			{
+				return this._createcode;
+			}
+			set
+			{
+				if ((this._createcode != value))
+				{
+					this._createcode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> createdate
+		{
+			get
+			{
+				return this._createdate;
+			}
+			set
+			{
+				if ((this._createdate != value))
+				{
+					this._createdate = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MAS_DEP")]
+	public partial class MAS_DEP : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DP_ID;
+		
+		private string _DPCODE;
+		
+		private string _DEPARTMENT;
+		
+		private System.Nullable<char> _CFLAG;
+		
+		private string _CREATECODE;
+		
+		private System.Nullable<System.DateTime> _CREATEDATE;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDP_IDChanging(int value);
+    partial void OnDP_IDChanged();
+    partial void OnDPCODEChanging(string value);
+    partial void OnDPCODEChanged();
+    partial void OnDEPARTMENTChanging(string value);
+    partial void OnDEPARTMENTChanged();
+    partial void OnCFLAGChanging(System.Nullable<char> value);
+    partial void OnCFLAGChanged();
+    partial void OnCREATECODEChanging(string value);
+    partial void OnCREATECODEChanged();
+    partial void OnCREATEDATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnCREATEDATEChanged();
+    #endregion
+		
+		public MAS_DEP()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DP_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DP_ID
+		{
+			get
+			{
+				return this._DP_ID;
+			}
+			set
+			{
+				if ((this._DP_ID != value))
+				{
+					this.OnDP_IDChanging(value);
+					this.SendPropertyChanging();
+					this._DP_ID = value;
+					this.SendPropertyChanged("DP_ID");
+					this.OnDP_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DPCODE", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string DPCODE
+		{
+			get
+			{
+				return this._DPCODE;
+			}
+			set
+			{
+				if ((this._DPCODE != value))
+				{
+					this.OnDPCODEChanging(value);
+					this.SendPropertyChanging();
+					this._DPCODE = value;
+					this.SendPropertyChanged("DPCODE");
+					this.OnDPCODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPARTMENT", DbType="NVarChar(255)")]
+		public string DEPARTMENT
+		{
+			get
+			{
+				return this._DEPARTMENT;
+			}
+			set
+			{
+				if ((this._DEPARTMENT != value))
+				{
+					this.OnDEPARTMENTChanging(value);
+					this.SendPropertyChanging();
+					this._DEPARTMENT = value;
+					this.SendPropertyChanged("DEPARTMENT");
+					this.OnDEPARTMENTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CFLAG", DbType="NChar(1)")]
+		public System.Nullable<char> CFLAG
+		{
+			get
+			{
+				return this._CFLAG;
+			}
+			set
+			{
+				if ((this._CFLAG != value))
+				{
+					this.OnCFLAGChanging(value);
+					this.SendPropertyChanging();
+					this._CFLAG = value;
+					this.SendPropertyChanged("CFLAG");
+					this.OnCFLAGChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATECODE", DbType="NVarChar(20)")]
+		public string CREATECODE
+		{
+			get
+			{
+				return this._CREATECODE;
+			}
+			set
+			{
+				if ((this._CREATECODE != value))
+				{
+					this.OnCREATECODEChanging(value);
+					this.SendPropertyChanging();
+					this._CREATECODE = value;
+					this.SendPropertyChanged("CREATECODE");
+					this.OnCREATECODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATEDATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATEDATE
+		{
+			get
+			{
+				return this._CREATEDATE;
+			}
+			set
+			{
+				if ((this._CREATEDATE != value))
+				{
+					this.OnCREATEDATEChanging(value);
+					this.SendPropertyChanging();
+					this._CREATEDATE = value;
+					this.SendPropertyChanged("CREATEDATE");
+					this.OnCREATEDATEChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -443,25 +732,49 @@ namespace Ticket_OP.DATA
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MAS_USER_A")]
-	public partial class MAS_USER_A
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_USER_ALL")]
+	public partial class VW_USER_ALL
 	{
 		
 		private int _US_ID;
 		
-		private string _ANAME;
+		private string _STCODE;
 		
-		private string _CFLAG;
+		private string _PASSWORD;
 		
-		private string _createcode;
+		private string _FNAME;
 		
-		private System.Nullable<System.DateTime> _createdate;
+		private string _LNAME;
 		
-		public MAS_USER_A()
+		private string _NICKNAME;
+		
+		private string _MAIL;
+		
+		private System.Nullable<char> _SEX;
+		
+		private int _D_ID;
+		
+		private byte _A_ID;
+		
+		private byte _CFLAG;
+		
+		private string _CREATECODE;
+		
+		private System.Nullable<System.DateTime> _CREATEDATE;
+		
+		private System.Nullable<int> _DP_ID;
+		
+		private string _DPCODE;
+		
+		private string _DEPARTMENT;
+		
+		private System.Nullable<char> _Expr1;
+		
+		public VW_USER_ALL()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_US_ID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_US_ID", DbType="Int NOT NULL")]
 		public int US_ID
 		{
 			get
@@ -477,24 +790,152 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ANAME", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string ANAME
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STCODE", DbType="VarChar(50)")]
+		public string STCODE
 		{
 			get
 			{
-				return this._ANAME;
+				return this._STCODE;
 			}
 			set
 			{
-				if ((this._ANAME != value))
+				if ((this._STCODE != value))
 				{
-					this._ANAME = value;
+					this._STCODE = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CFLAG", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string CFLAG
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string PASSWORD
+		{
+			get
+			{
+				return this._PASSWORD;
+			}
+			set
+			{
+				if ((this._PASSWORD != value))
+				{
+					this._PASSWORD = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FNAME", DbType="VarChar(50)")]
+		public string FNAME
+		{
+			get
+			{
+				return this._FNAME;
+			}
+			set
+			{
+				if ((this._FNAME != value))
+				{
+					this._FNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LNAME", DbType="VarChar(50)")]
+		public string LNAME
+		{
+			get
+			{
+				return this._LNAME;
+			}
+			set
+			{
+				if ((this._LNAME != value))
+				{
+					this._LNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NICKNAME", DbType="VarChar(50)")]
+		public string NICKNAME
+		{
+			get
+			{
+				return this._NICKNAME;
+			}
+			set
+			{
+				if ((this._NICKNAME != value))
+				{
+					this._NICKNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAIL", DbType="VarChar(255)")]
+		public string MAIL
+		{
+			get
+			{
+				return this._MAIL;
+			}
+			set
+			{
+				if ((this._MAIL != value))
+				{
+					this._MAIL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SEX", DbType="Char(1)")]
+		public System.Nullable<char> SEX
+		{
+			get
+			{
+				return this._SEX;
+			}
+			set
+			{
+				if ((this._SEX != value))
+				{
+					this._SEX = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D_ID", DbType="Int NOT NULL")]
+		public int D_ID
+		{
+			get
+			{
+				return this._D_ID;
+			}
+			set
+			{
+				if ((this._D_ID != value))
+				{
+					this._D_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A_ID", DbType="TinyInt NOT NULL")]
+		public byte A_ID
+		{
+			get
+			{
+				return this._A_ID;
+			}
+			set
+			{
+				if ((this._A_ID != value))
+				{
+					this._A_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CFLAG", DbType="TinyInt NOT NULL")]
+		public byte CFLAG
 		{
 			get
 			{
@@ -509,161 +950,7 @@ namespace Ticket_OP.DATA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createcode", DbType="NVarChar(20)")]
-		public string createcode
-		{
-			get
-			{
-				return this._createcode;
-			}
-			set
-			{
-				if ((this._createcode != value))
-				{
-					this._createcode = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> createdate
-		{
-			get
-			{
-				return this._createdate;
-			}
-			set
-			{
-				if ((this._createdate != value))
-				{
-					this._createdate = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MAS_DEP")]
-	public partial class MAS_DEP : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _DP_ID;
-		
-		private string _DPCODE;
-		
-		private string _DEPARTMENT;
-		
-		private System.Nullable<char> _CFLAG;
-		
-		private string _CREATECODE;
-		
-		private System.Nullable<System.DateTime> _CREATEDATE;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDP_IDChanging(int value);
-    partial void OnDP_IDChanged();
-    partial void OnDPCODEChanging(string value);
-    partial void OnDPCODEChanged();
-    partial void OnDEPARTMENTChanging(string value);
-    partial void OnDEPARTMENTChanged();
-    partial void OnCFLAGChanging(System.Nullable<char> value);
-    partial void OnCFLAGChanged();
-    partial void OnCREATECODEChanging(string value);
-    partial void OnCREATECODEChanged();
-    partial void OnCREATEDATEChanging(System.Nullable<System.DateTime> value);
-    partial void OnCREATEDATEChanged();
-    #endregion
-		
-		public MAS_DEP()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DP_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int DP_ID
-		{
-			get
-			{
-				return this._DP_ID;
-			}
-			set
-			{
-				if ((this._DP_ID != value))
-				{
-					this.OnDP_IDChanging(value);
-					this.SendPropertyChanging();
-					this._DP_ID = value;
-					this.SendPropertyChanged("DP_ID");
-					this.OnDP_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DPCODE", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
-		public string DPCODE
-		{
-			get
-			{
-				return this._DPCODE;
-			}
-			set
-			{
-				if ((this._DPCODE != value))
-				{
-					this.OnDPCODEChanging(value);
-					this.SendPropertyChanging();
-					this._DPCODE = value;
-					this.SendPropertyChanged("DPCODE");
-					this.OnDPCODEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPARTMENT", DbType="NVarChar(255)")]
-		public string DEPARTMENT
-		{
-			get
-			{
-				return this._DEPARTMENT;
-			}
-			set
-			{
-				if ((this._DEPARTMENT != value))
-				{
-					this.OnDEPARTMENTChanging(value);
-					this.SendPropertyChanging();
-					this._DEPARTMENT = value;
-					this.SendPropertyChanged("DEPARTMENT");
-					this.OnDEPARTMENTChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CFLAG", DbType="NChar(1)")]
-		public System.Nullable<char> CFLAG
-		{
-			get
-			{
-				return this._CFLAG;
-			}
-			set
-			{
-				if ((this._CFLAG != value))
-				{
-					this.OnCFLAGChanging(value);
-					this.SendPropertyChanging();
-					this._CFLAG = value;
-					this.SendPropertyChanged("CFLAG");
-					this.OnCFLAGChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATECODE", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATECODE", DbType="VarChar(50)")]
 		public string CREATECODE
 		{
 			get
@@ -674,11 +961,7 @@ namespace Ticket_OP.DATA
 			{
 				if ((this._CREATECODE != value))
 				{
-					this.OnCREATECODEChanging(value);
-					this.SendPropertyChanging();
 					this._CREATECODE = value;
-					this.SendPropertyChanged("CREATECODE");
-					this.OnCREATECODEChanged();
 				}
 			}
 		}
@@ -694,32 +977,72 @@ namespace Ticket_OP.DATA
 			{
 				if ((this._CREATEDATE != value))
 				{
-					this.OnCREATEDATEChanging(value);
-					this.SendPropertyChanging();
 					this._CREATEDATE = value;
-					this.SendPropertyChanged("CREATEDATE");
-					this.OnCREATEDATEChanged();
 				}
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DP_ID", DbType="Int")]
+		public System.Nullable<int> DP_ID
 		{
-			if ((this.PropertyChanging != null))
+			get
 			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
+				return this._DP_ID;
+			}
+			set
+			{
+				if ((this._DP_ID != value))
+				{
+					this._DP_ID = value;
+				}
 			}
 		}
 		
-		protected virtual void SendPropertyChanged(String propertyName)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DPCODE", DbType="NVarChar(10)")]
+		public string DPCODE
 		{
-			if ((this.PropertyChanged != null))
+			get
 			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this._DPCODE;
+			}
+			set
+			{
+				if ((this._DPCODE != value))
+				{
+					this._DPCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPARTMENT", DbType="NVarChar(255)")]
+		public string DEPARTMENT
+		{
+			get
+			{
+				return this._DEPARTMENT;
+			}
+			set
+			{
+				if ((this._DEPARTMENT != value))
+				{
+					this._DEPARTMENT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Expr1", DbType="NChar(1)")]
+		public System.Nullable<char> Expr1
+		{
+			get
+			{
+				return this._Expr1;
+			}
+			set
+			{
+				if ((this._Expr1 != value))
+				{
+					this._Expr1 = value;
+				}
 			}
 		}
 	}

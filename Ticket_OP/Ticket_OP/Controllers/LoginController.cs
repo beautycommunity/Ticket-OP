@@ -11,6 +11,7 @@ namespace Ticket_OP.Controllers
     public class LoginController : Controller
     {
         string userOnline;
+        string _POS;
 
         // GET: Login
         public ActionResult Index()
@@ -23,15 +24,64 @@ namespace Ticket_OP.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            userOnline = GetCookie();
+            userOnline = GetCookie("1");
+            _POS = "1";
             if (userOnline != string.Empty)
             {
-                return RedirectToLocal(returnUrl);
+                return RedirectToLocal(returnUrl,"1");
             }
 
             ViewBag.ReturnUrl = returnUrl;
 
             return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Login_Office(string returnUrl)
+        {
+            userOnline = GetCookie("0");
+            _POS = "0";
+            if (userOnline != string.Empty)
+            {
+                return RedirectToLocal(returnUrl,"0");
+            }
+
+            ViewBag.ReturnUrl = returnUrl;
+
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login_Office(USER_LOGIN model, string returnUrl)
+        {
+            int LoginCase = 0;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (LoginBase(model,0))
+            {
+                LoginCase = 1;
+            }
+
+
+            switch (LoginCase)
+            {
+                case 1: // Complete Redirect
+                    Session["User"] = model.STCODE;
+                    TempData["User"] = model.STCODE;
+                    SetCookie(model.STCODE,"0");
+                    return RedirectToLocal(returnUrl,"0");
+                case 2: //Lock out
+                    return RedirectToAction("updatedid", model);
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
         }
 
 
@@ -48,7 +98,7 @@ namespace Ticket_OP.Controllers
                 return View(model);
             }
 
-            if (LoginBase(model))
+            if (LoginBase(model,1))
             {
                 LoginCase = 1;
             }
@@ -59,8 +109,8 @@ namespace Ticket_OP.Controllers
                 case 1: // Complete Redirect
                     Session["User"] = model.WHCODE;
                     TempData["User"] = model.WHCODE;
-                    SetCookie(model.WHCODE);
-                    return RedirectToLocal(returnUrl);
+                    SetCookie(model.WHCODE,"1");
+                    return RedirectToLocal(returnUrl,"1");
                 case 2: //Lock out
                     return RedirectToAction("updatedid", model);
                 default:
@@ -69,19 +119,33 @@ namespace Ticket_OP.Controllers
             }
         }
 
-        public bool LoginBase(USER_LOGIN model)
+        public bool LoginBase(USER_LOGIN model,int Position)
         {
             bool OK = false;
 
             Data_OPDataContext Context = new Data_OPDataContext();
+            Data_UserDataContext Context_user = new Data_UserDataContext();
 
-            //var queryX = Context.MAS_USERs.Where(x => x.STCODE == model.STCODE && x.PASSWORD == model.PASSWORD).Count();
-            var queryX = Context.MAS_WHs.Where(x => x.WHCODE == model.WHCODE && x.WHCODE == model.PASSWORD).Count();
-
-            if (queryX > 0)
+            if (Position == 1)
             {
+                var queryX = Context.MAS_WHs.Where(x => x.WHCODE == model.WHCODE && x.WHCODE == model.PASSWORD).Count();
 
-                OK = true;
+                if (queryX > 0)
+                {
+
+                    OK = true;
+                }
+
+            }
+            else
+            {
+                var queryX = Context_user.MAS_USERs.Where(x => x.STCODE == model.STCODE && x.PASSWORD == model.PASSWORD).Count();
+
+                if (queryX > 0)
+                {
+
+                    OK = true;
+                }
             }
 
             return OK;
@@ -120,23 +184,22 @@ namespace Ticket_OP.Controllers
 
 
         // GET:
-
-
-        private ActionResult RedirectToLocal(string returnUrl)
+        private ActionResult RedirectToLocal(string returnUrl,string Position)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
 
-            return RedirectToAction("Index", "TicketOP");
+            return RedirectToAction("Index", "TicketOP", new { Pos = Position });
         }
 
-        public bool chkSesionUser()
+        public bool chkSesionUser(string POS)
         {
             bool chk = true;
 
-            userOnline = GetCookie();
+            userOnline = GetCookie(POS);
+            
 
             if (userOnline == string.Empty)
             {
@@ -181,42 +244,96 @@ namespace Ticket_OP.Controllers
             return chk;
         }
 
-        private void SetCookie(string User)
+        private void SetCookie(string User,string POS)
         {
-            try
-            {
-                Request.Cookies["bbStcode"].Value = User;
-            }
-            catch
-            {
-                HttpCookie BeautyCookies = new HttpCookie("bbStcode");
-                BeautyCookies.Value = User;
-                BeautyCookies.Expires = DateTime.Now.AddDays(1);
 
-                Response.Cookies.Add(BeautyCookies);
+            //try
+            //{
+            //    Request.Cookies["bbWhcode"].Value = User;
+            //}
+            //catch
+            //{
+            //    HttpCookie BeautyCookies = new HttpCookie("bbWhcode");
+            //    BeautyCookies.Value = User;
+            //    BeautyCookies.Expires = DateTime.Now.AddDays(1);
+
+            //    Response.Cookies.Add(BeautyCookies);
+            //}
+
+            if (POS == "0")
+            {
+                try
+                {
+                    Request.Cookies["bbStcode"].Value = User;
+                }
+                catch
+                {
+                    HttpCookie BeautyCookies = new HttpCookie("bbStcode");
+                    BeautyCookies.Value = User;
+                    BeautyCookies.Expires = DateTime.Now.AddDays(1);
+
+                    Response.Cookies.Add(BeautyCookies);
+                }
             }
+            else
+            {
+                try
+                {
+                    Request.Cookies["bbWhcode"].Value = User;
+                }
+                catch
+                {
+                    HttpCookie BeautyCookies = new HttpCookie("bbWhcode");
+                    BeautyCookies.Value = User;
+                    BeautyCookies.Expires = DateTime.Now.AddDays(1);
+
+                    Response.Cookies.Add(BeautyCookies);
+                }
+            }
+
             //Request.Cookies["bbStcode"].Value = User;   
         }
 
 
-        private string GetCookie()
+        private string GetCookie(string POS)
         {
+            
             string cookievalue = string.Empty;
 
-            if (Request.Cookies["bbStcode"] != null)
+            if (POS == "1")
             {
-                cookievalue = Request.Cookies["bbStcode"].Value.ToString();
+                if (Request.Cookies["bbWhcode"] != null)
+                {
+                    cookievalue = Request.Cookies["bbWhcode"].Value.ToString();
+                }
+            }
+            else
+            {
+                if (Request.Cookies["bbStcode"] != null)
+                {
+                    cookievalue = Request.Cookies["bbStcode"].Value.ToString();
+                }
             }
 
             return cookievalue;
         }
 
 
-        private void RemoveCookie()
+        private void RemoveCookie(string POS)
         {
-            if (Request.Cookies["bbStcode"] != null)
+            if (POS == "0")
             {
-                Response.Cookies["bbStcode"].Expires = DateTime.Now.AddDays(-1);
+                if (Request.Cookies["bbStcode"] != null)
+                {
+                    Response.Cookies["bbStcode"].Expires = DateTime.Now.AddDays(-1);
+                }
+            }
+            else
+            {
+                if (Request.Cookies["bbWhcode"] != null)
+                {
+                    Response.Cookies["bbWhcode"].Expires = DateTime.Now.AddDays(-1);
+                }
             }
         }
 
@@ -224,21 +341,46 @@ namespace Ticket_OP.Controllers
         {
             try
             {
+
                 Session["User"] = null;
                 Session["DP"] = null;
                 Session["SharedName"] = null;
-                RemoveCookie();
+                RemoveCookie("1");
             }
             catch
             {
                 Session["User"] = "";
                 Session["DP"] = "";
                 Session["SharedName"] = "";
-                RemoveCookie();
+                RemoveCookie("1");
+
                 return RedirectToAction("Login", "Login");
             }
 
             return RedirectToAction("Login", "Login");
+        }
+
+        public ActionResult Logout_Office()
+        {
+            try
+            {
+
+                Session["User"] = null;
+                Session["DP"] = null;
+                Session["SharedName"] = null;
+                RemoveCookie("0");
+            }
+            catch
+            {
+                Session["User"] = "";
+                Session["DP"] = "";
+                Session["SharedName"] = "";
+                RemoveCookie("0");
+
+                return RedirectToAction("Login_Office", "Login");
+            }
+
+            return RedirectToAction("Login_Office", "Login");
         }
     }
 }

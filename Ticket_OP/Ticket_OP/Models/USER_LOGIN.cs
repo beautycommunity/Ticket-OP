@@ -18,6 +18,9 @@ namespace Ticket_OP.Models
     {
         public int? ID { get; set; }
 
+        [Display(Name = "รหัสพนักงาน")]
+        public string STCODE { get; set; }
+
         [Display(Name = "รหัสสาขา")]
         public string WHCODE { get; set; }
 

@@ -76,7 +76,7 @@
 
 <br />
 
-    <a href="@Url.Action("Index")" class="btn btn-default">กลับหน้าหลัก</a>
+    <a href="@Url.Action("Index", new { Pos = @ViewBag.Pos })" class="btn btn-default">กลับหน้าหลัก</a>
 
 <br />
 <hr />
@@ -215,7 +215,7 @@
             </section>
             <hr />
 
-                @*@if (_item.FLS_H_1 != null || _item.FLS_H_2 != null || _item.FLS_H_3 != null)
+                @if (_item.FLS_H_1 != null || _item.FLS_H_2 != null || _item.FLS_H_3 != null)
                 {
                     <div class="row">
                         <div class="col-md-4">
@@ -308,7 +308,7 @@
 
                         </div>
                     </div>
-                }*@
+                }
 
             </div>
         }
@@ -393,21 +393,21 @@
     </script>
     <script>
 
-        //$("#img01").click(function () {
+        $("#img01").click(function () {
 
-        //    $("#myModal1").modal("show");
+            $("#myModal1").modal("show");
 
-        //});
-        //$("#img02").click(function () {
+        });
+        $("#img02").click(function () {
 
-        //    $("#myModal2").modal("show");
+            $("#myModal2").modal("show");
 
-        //});
-        //$("#img03").click(function () {
+        });
+        $("#img03").click(function () {
 
-        //    $("#myModal3").modal("show");
+            $("#myModal3").modal("show");
 
-        //});
+        });
 
     </script>
 
