@@ -11,7 +11,7 @@ namespace Ticket_OP.Controllers
     public class LoginController : Controller
     {
         string userOnline;
-        string _POS;
+        //string _POS;
 
         // GET: Login
         public ActionResult Index()
@@ -25,7 +25,7 @@ namespace Ticket_OP.Controllers
         public ActionResult Login(string returnUrl)
         {
             userOnline = GetCookie("1");
-            _POS = "1";
+
             if (userOnline != string.Empty)
             {
                 return RedirectToLocal(returnUrl,"1");
@@ -40,7 +40,7 @@ namespace Ticket_OP.Controllers
         public ActionResult Login_Office(string returnUrl)
         {
             userOnline = GetCookie("0");
-            _POS = "0";
+
             if (userOnline != string.Empty)
             {
                 return RedirectToLocal(returnUrl,"0");
@@ -66,6 +66,11 @@ namespace Ticket_OP.Controllers
             if (LoginBase(model,0))
             {
                 LoginCase = 1;
+
+                if (checkedepartment(model))
+                {
+                    LoginCase = 2;
+                }
             }
 
 
@@ -112,7 +117,7 @@ namespace Ticket_OP.Controllers
                     SetCookie(model.WHCODE,"1");
                     return RedirectToLocal(returnUrl,"1");
                 case 2: //Lock out
-                    return RedirectToAction("updatedid", model);
+                    //return RedirectToAction("updatedid", model);
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
@@ -151,37 +156,57 @@ namespace Ticket_OP.Controllers
             return OK;
         }
 
-        //public ActionResult updatedid(USER_LOGIN model)
-        //{
-        //    Dp_List ul = new Dp_List();
-        //    Data_UserDataContext db = new Data_UserDataContext();
+        private bool checkedepartment(USER_LOGIN model)
+        {
 
-        //    ul.STCODE = model.STCODE;
-        //    ul.JT_LIST = new SelectList(db.MAS_DEPs, "DP_ID", "DEPARTMENT");
+            Data_UserDataContext Context = new Data_UserDataContext();
 
-        //    return View(ul);
-        //}
+            var queryX = Context.MAS_USERs.Where(x => x.STCODE == model.STCODE && x.PASSWORD == model.PASSWORD).FirstOrDefault();
 
-        //[HttpPost]
-        //public ActionResult updatedid(Dp_List model)
-        //{
-        //    using (Data_UserDataContext db = new Data_UserDataContext())
-        //    {
+            if (queryX.D_ID == 0)
+            {
 
-        //        var q = (from pp in db.MAS_USERs
-        //                 where pp.STCODE == model.STCODE
-        //                 select pp).FirstOrDefault();
+                return true;
 
-        //        q.D_ID = (int)model.JT_ID;
+            }
+            else
+            {
 
-        //        db.SubmitChanges();
+                return false;
 
-        //    }
+            }
 
-        //    return RedirectToAction("Index", "Ticket");
-        //}
+        }
 
+        public ActionResult updatedid(USER_LOGIN model)
+        {
+            Dp_List ul = new Dp_List();
+            Data_UserDataContext db = new Data_UserDataContext();
 
+            ul.STCODE = model.STCODE;
+            ul.JT_LIST = new SelectList(db.MAS_DEPs, "DP_ID", "DEPARTMENT");
+
+            return View(ul);
+        }
+
+        [HttpPost]
+        public ActionResult updatedid(Dp_List model)
+        {
+            using (Data_UserDataContext db = new Data_UserDataContext())
+            {
+
+                var q = (from pp in db.MAS_USERs
+                         where pp.STCODE == model.STCODE
+                         select pp).FirstOrDefault();
+
+                q.D_ID = (int)model.JT_ID;
+
+                db.SubmitChanges();
+
+            }
+
+            return RedirectToAction("Index", "TicketOP", new { Pos = "0" });
+        }
 
         // GET:
         private ActionResult RedirectToLocal(string returnUrl,string Position)

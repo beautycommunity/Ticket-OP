@@ -166,6 +166,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CreTicket.cs" />
+    <Compile Include="Models\Dp_List.cs" />
     <Compile Include="Models\USER_LOGIN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -229,6 +230,7 @@
     <Content Include="Views\TicketOP\CreateTicket.cshtml" />
     <Content Include="Views\TicketOP\TicketDetail.cshtml" />
     <Content Include="Views\Login\Login_Office.cshtml" />
+    <Content Include="Views\Login\updatedid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
