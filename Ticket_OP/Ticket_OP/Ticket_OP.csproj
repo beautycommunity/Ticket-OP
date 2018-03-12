@@ -234,6 +234,9 @@
     <Content Include="Views\Login\updatedid.cshtml" />
     <Content Include="Views\Home\SandEmail.cshtml" />
     <Content Include="Views\Home\success.cshtml" />
+    <Content Include="Views\Home\SandEmail_BCOM.cshtml" />
+    <Content Include="Views\Shared\_LayoutMail.cshtml" />
+    <Content Include="Views\Home\success_BCOM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
