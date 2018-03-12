@@ -1,0 +1,48 @@
+﻿@model Ticket_OP.Models.SandEmail
+@{
+    //ViewBag.Title = "updatedid";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<br />
+
+@using (Html.BeginForm("SandEmail_S", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+<h3>Inquiry BeautyCommunity</h3>
+<hr />
+    <br />
+    @Html.LabelFor(m => m.FULLNAME, new { @class = "col-md control-label" })
+    @Html.TextBoxFor(m => m.FULLNAME, new { @placeholder = "Full Name", @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.FULLNAME, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(m => m.EMAIL, new { @class = "col-md control-label" })
+    @Html.TextBoxFor(m => m.EMAIL, new { @placeholder = "you@example.com", @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.EMAIL, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(m => m.PHONE, new { @class = "col-md control-label" })
+    @Html.TextBoxFor(m => m.PHONE, new { @placeholder = "PHONE", @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.PHONE, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(m => m.MESSAGE, new { @class = "col-md control-label" })
+    @Html.TextAreaFor(m => m.MESSAGE, new { @placeholder = "MESSAGE", @class = "form-control", @rows = "5" })
+    @Html.ValidationMessageFor(m => m.MESSAGE, "", new { @class = "text-danger" })
+
+    <br />
+    <br />
+    @*@Html.HiddenFor(m => m.STCODE)*@
+
+
+    <div>
+        <input type="submit" value="บันทึก" class="btn btn-primary form-control" />
+    </div>
+
+
+}
+
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
