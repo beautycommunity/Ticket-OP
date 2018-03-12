@@ -68,9 +68,9 @@ namespace Ticket_OP.Controllers
             {
                 MailMessage mail = new MailMessage();
 
-                mail.From = new MailAddress("itticket@beautycommunity.co.th", "International Business");
+                mail.From = new MailAddress("OsContact@beautycommunity.co.th", "International Business");
 
-                mail.To.Add("OsContact@beautycommunity.co.th");
+                mail.To.Add("export@beautycommunity.co.th");
                 mail.Subject = "Inquiry BeautyCommunity";
 
                 //if (devdetail.EMAIL != null && devdetail.EMAIL.Length > 10)
@@ -151,7 +151,7 @@ namespace Ticket_OP.Controllers
             {
                 MailMessage mail = new MailMessage();
 
-                mail.From = new MailAddress("itticket@beautycommunity.co.th", "User");
+                mail.From = new MailAddress("OsContact@beautycommunity.co.th", "User");
 
                 mail.To.Add("contact@beautycommunity.co.th");
                 mail.Subject = "Information request from your website";
