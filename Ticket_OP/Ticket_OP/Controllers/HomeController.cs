@@ -151,7 +151,7 @@ namespace Ticket_OP.Controllers
             {
                 MailMessage mail = new MailMessage();
 
-                mail.From = new MailAddress("OsContact@beautycommunity.co.th", "User");
+                mail.From = new MailAddress("itticket@beautycommunity.co.th", "User");
 
                 mail.To.Add("contact@beautycommunity.co.th");
                 mail.Subject = "Information request from your website";
