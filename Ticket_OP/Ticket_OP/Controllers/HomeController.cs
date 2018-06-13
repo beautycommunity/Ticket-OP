@@ -33,7 +33,6 @@ namespace Ticket_OP.Controllers
         public ActionResult SandEmail()
         {
             
-
             return View();
         }
 
@@ -73,13 +72,6 @@ namespace Ticket_OP.Controllers
                 mail.To.Add("export@beautycommunity.co.th");
                 mail.Subject = "Inquiry BeautyCommunity";
 
-                //if (devdetail.EMAIL != null && devdetail.EMAIL.Length > 10)
-                //{
-                //    mail.To.Add(devdetail.EMAIL_CRE);
-                //}
-                //else{
-                //    mail.Subject = "ปิด Ticket ! " + devdetail.TOPIC;
-                //}
 
                 mail.IsBodyHtml = true;
                 StringBuilder sb = new StringBuilder();

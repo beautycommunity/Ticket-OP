@@ -355,7 +355,7 @@
                     {
                         @Html.TextBoxFor(m => m.TK_ID, new { @class = "hidden" })
                         @Html.TextBoxFor(m => m.TICKETNO, new { @class = "hidden" })
-
+                        @Html.HiddenFor(m =>m.STCODE,Model.STCODE)
 
                         <div class="form-group">
                             @Html.LabelFor(m => m.TK_MESAGE, new { @class = "col-md-2 control-label" })

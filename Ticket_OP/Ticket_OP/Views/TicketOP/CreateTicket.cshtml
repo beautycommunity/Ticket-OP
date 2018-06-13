@@ -26,7 +26,7 @@
             {
                 @*@Html.TextBoxFor(m => m.US_ID, new { @class = "hidden" })*@
                 <hr />
-
+                    @Html.HiddenFor(m => m.STCODE, Model.STCODE)
                     <div class="form-group">
                         @Html.Label("แจ้งงานจากสาขา", new { @class = "col-md-3 control-label" })
                         <div class="col-md-4">

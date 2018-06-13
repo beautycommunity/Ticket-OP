@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Ticket_OP.Models
 {
     public class CreTicket
     {
+        public string STCODE { get; set; }
         public int TK_ID { get; set; }
 
         [Display(Name = "เลขที่")]
@@ -32,8 +34,6 @@ namespace Ticket_OP.Models
 
 
         public int? US_ID { get; set; }
-        //[Display(Name = "ผู้แจ้ง")]
-        //public string CRE_NAME { get; set; }
 
         [Display(Name = "ผู้แจ้ง")]
         public string CRE_NICKNAME { get; set; }
@@ -51,8 +51,20 @@ namespace Ticket_OP.Models
         public IEnumerable<HttpPostedFileBase> file { get; set; }
     }
 
+    [JsonObject(IsReference = true)]
+    public class RetApi
+    {
+
+        public string status { get; set; }
+        public string message { get; set; }
+        public string USERNO { get; set; }
+
+    }
+
+    [JsonObject(IsReference = true)]
     public class Ticket
     {
+        public string BRAND { get; set; }
         public int TK_ID { get; set; }
 
         [Display(Name = "เลขที่")]
@@ -119,8 +131,20 @@ namespace Ticket_OP.Models
         public string IMG_3 { get; set; }
     }
 
+    [JsonObject(IsReference = true)]
+    public class Detail
+    {
+        public int Ticket_ID { get; set; }
+        public string STCODE { get; set; }
+        public string Pos { get; set; }
+        public string seach { get; set; }
+        public string type { get; set; }
+    }
+
+    [JsonObject(IsReference = true)]
     public class AddComment
     {
+        public string STCODE { get; set; }
         public int TK_ID { get; set; }
         public int ORDERNO { get; set; }
         public string TICKETNO { get; set; }
